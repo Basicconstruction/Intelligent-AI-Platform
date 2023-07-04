@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformLib", "PlatformLib\PlatformLib.csproj", "{93F2AF6A-8C60-462C-B57D-210D3F7FCBCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intelligent AI Platform", "Intelligent AI Platform\Intelligent AI Platform.csproj", "{975A72F2-8295-429C-BCF8-F1A3DAAC7187}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAI", "OpenAI\OpenAI.csproj", "{C29AE45C-5775-4973-A2E8-20AF0D3F300B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93F2AF6A-8C60-462C-B57D-210D3F7FCBCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93F2AF6A-8C60-462C-B57D-210D3F7FCBCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93F2AF6A-8C60-462C-B57D-210D3F7FCBCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93F2AF6A-8C60-462C-B57D-210D3F7FCBCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{975A72F2-8295-429C-BCF8-F1A3DAAC7187}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{975A72F2-8295-429C-BCF8-F1A3DAAC7187}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{975A72F2-8295-429C-BCF8-F1A3DAAC7187}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{975A72F2-8295-429C-BCF8-F1A3DAAC7187}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C29AE45C-5775-4973-A2E8-20AF0D3F300B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C29AE45C-5775-4973-A2E8-20AF0D3F300B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C29AE45C-5775-4973-A2E8-20AF0D3F300B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C29AE45C-5775-4973-A2E8-20AF0D3F300B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

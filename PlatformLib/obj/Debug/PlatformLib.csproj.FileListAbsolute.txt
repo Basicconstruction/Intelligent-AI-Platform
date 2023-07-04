@@ -1,0 +1,6 @@
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\PlatformLib\obj\Debug\PlatformLib.csproj.AssemblyReference.cache
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\PlatformLib\obj\Debug\PlatformLib.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\PlatformLib\bin\Debug\PlatformLib.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\PlatformLib\bin\Debug\PlatformLib.pdb
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\PlatformLib\obj\Debug\PlatformLib.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\PlatformLib\obj\Debug\PlatformLib.pdb

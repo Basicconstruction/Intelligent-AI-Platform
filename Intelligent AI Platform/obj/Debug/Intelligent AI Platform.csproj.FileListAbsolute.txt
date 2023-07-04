@@ -1,0 +1,61 @@
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Intelligent_AI_Platform.exe.config
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Intelligent_AI_Platform.exe
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Intelligent_AI_Platform.pdb
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\PlatformLib.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\PlatformLib.pdb
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent AI Platform.csproj.AssemblyReference.cache
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent AI Platform.csproj.SuggestedBindingRedirects.cache
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\MainWindow.baml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\MainWindow.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\App.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent_AI_Platform_MarkupCompile.cache
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent_AI_Platform_MarkupCompile.lref
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent_AI_Platform.g.resources
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent_AI_Platform.Properties.Resources.resources
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent AI Platform.csproj.GenerateResource.cache
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent AI Platform.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent AI Platform.csproj.CopyComplete
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent_AI_Platform.exe
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent_AI_Platform.pdb
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\pages\platform\app\GenericChat\ChatActivity.baml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\pages\platform\app\GenericChat\ChatActivity.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\pages\platform\PlatformActivity.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\pages\platform\PlatformActivity.baml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\ChatMenu.baml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\chatsession\InputBox.baml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\chatsession\VerticalArrangedComponentManager.baml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\ChatList.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\ChatMenu.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\chatsession\ChatSession.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\chatsession\InputBox.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\chatsession\VerticalArrangedComponentManager.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\ChatList.baml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\chatsession\ChatSession.baml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Markdig.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Markdig.Wpf.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Buffers.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Memory.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Markdig.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Buffers.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Memory.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Reactive.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Reactive.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\OpenAI.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\OpenAI.pdb
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\item\SessionListItem.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\item\SessionListItem.baml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\item\Stop.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\item\Stop.baml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\pages\platform\app\GenericChat\dialog\setting\Setting.baml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\pages\platform\app\GenericChat\dialog\setting\Setting.g.cs

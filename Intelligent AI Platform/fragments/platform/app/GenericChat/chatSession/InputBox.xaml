@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession.InputBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tools="clr-namespace:PlatformLib.tools;assembly=PlatformLib"
+             mc:Ignorable="d"
+             d:DesignHeight="200" d:DesignWidth="760"
+             Width="760" Height="200"
+             SizeChanged="MessageInputSizeChanged">
+
+    <Canvas x:Name="InnerCanvas" Background="#fff2f2f2">
+        <!-- RichTextBox -->
+        <tools:TextBoxRich x:Name="TextArea" AcceptsReturn="True" Canvas.Left="37" TextWrapping="Wrap" Text="" Canvas.Top="20" Width="686" Height="130" Background="#fff2f2f2" FontSize="16" TextChanged="OnTextChanged" PreviewKeyDown="TextAreaKeyDownPreview"/>
+        <Border x:Name="SendBtBorder" Canvas.Right="47" Canvas.Bottom="0" Width="94" Height="37" CornerRadius="12.5" BorderThickness="2" Padding="2" BorderBrush="#ff0099ff" Background="#ff0099ff">
+            <Button x:Name="SendBt" IsHitTestVisible="True" Content="发送" Background="#ff0099ff" Foreground="White"  Click="SendMessageInArea" BorderBrush="#ff0099ff">
+            </Button>
+        </Border>
+        <Button x:Name="Delete" Canvas.Left="37" Canvas.Top="155" Height="35" Width="35" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Image Source="../../../../../images/delete.png"/>
+        </Button>
+        <Button x:Name="Download" Canvas.Left="86" Canvas.Top="155" Height="35" Width="35" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Image Source="../../../../../images/download.png"/>
+        </Button>
+        <Button x:Name="Clear" Canvas.Left="136" Canvas.Top="155" Height="35" Width="35" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Image Source="../../../../../images/clear.jpg"/>
+        </Button>
+        <Button x:Name="UseContext" Canvas.Left="184" Canvas.Top="155" Height="35" Width="35" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Image Source="../../../../../images/green.png"/>
+        </Button>
+
+
+    </Canvas>
+</UserControl>

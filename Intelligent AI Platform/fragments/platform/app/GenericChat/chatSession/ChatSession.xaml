@@ -1,0 +1,13 @@
+﻿<Page x:Class="Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession.ChatSession"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession"
+      mc:Ignorable="d"
+      Title="ChatSession" Height="580" Width="600" SizeChanged="ChatSessionFragmentSizeChanged">
+    <Canvas>
+        <local:VerticalArrangedComponentManager x:Name="Vm" Canvas.Left="0" Canvas.Top="0" Width="600" Height="380"></local:VerticalArrangedComponentManager>
+        <local:InputBox x:Name="InputBox" Canvas.Bottom="0" Canvas.Left="0" ></local:InputBox>
+    </Canvas>
+</Page>

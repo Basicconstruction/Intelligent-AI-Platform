@@ -1,0 +1,20 @@
+﻿Intelligent_AI_Platform
+
+
+winexe
+C#
+.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\
+Intelligent_AI_Platform
+none
+false
+DEBUG;TRACE
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\App.xaml
+11-1194019060
+
+24181138340
+132-1188319213
+fragments\platform\app\GenericChat\ChatList.xaml;fragments\platform\app\GenericChat\ChatMenu.xaml;fragments\platform\app\GenericChat\chatSession\ChatSession.xaml;fragments\platform\app\GenericChat\chatSession\InputBox.xaml;fragments\platform\app\GenericChat\chatSession\VerticalArrangedComponentManager.xaml;fragments\platform\app\GenericChat\item\SessionListItem.xaml;fragments\platform\app\GenericChat\item\Stop.xaml;MainWindow.xaml;pages\platform\app\GenericChat\ChatActivity.xaml;pages\platform\app\GenericChat\dialog\setting\Setting.xaml;pages\platform\PlatformActivity.xaml;
+
+False
+

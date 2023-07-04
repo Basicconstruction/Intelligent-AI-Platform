@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession.VerticalArrangedComponentManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="380" d:DesignWidth="760" SizeChanged="MessageListWidgetSizeChanged"
+             Width="760" Height="380" Background="#fff2f2f2">
+    <ScrollViewer x:Name="InnerScroll"  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden" ScrollChanged="ScrollViewScrollChanged">
+        <Canvas x:Name="InnerCanvas"  Height="380" Width="{Binding Width, RelativeSource={RelativeSource AncestorType=UserControl}}">
+            <!-- 绘制所有的消息组件 Height="{Binding CanvasHeight} -->
+        </Canvas>
+    </ScrollViewer>
+</UserControl>
