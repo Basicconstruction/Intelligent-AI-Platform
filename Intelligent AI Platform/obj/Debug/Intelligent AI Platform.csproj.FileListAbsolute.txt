@@ -59,3 +59,18 @@ C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Plat
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\fragments\platform\app\GenericChat\item\Stop.baml
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\pages\platform\app\GenericChat\dialog\setting\Setting.baml
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\pages\platform\app\GenericChat\dialog\setting\Setting.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Google.Protobuf.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\MethodBoundaryAspect.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\OneOf.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Protobuf.Text.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Serilog.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Serilog.Sinks.Console.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.ValueTuple.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Tensorflow.Binding.dll
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Google.Protobuf.pdb
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Google.Protobuf.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Serilog.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Serilog.Sinks.Console.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.ValueTuple.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Tensorflow.Binding.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent AI Platform.csproj.Fody.CopyLocal.cache

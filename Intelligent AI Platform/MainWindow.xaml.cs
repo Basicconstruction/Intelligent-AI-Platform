@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Intelligent_AI_Platform.linker;
 using Intelligent_AI_Platform.linker.manager;
-using Intelligent_AI_Platform.pages;
+using static Tensorflow.Binding;
 using Intelligent_AI_Platform.pages.platform.app.GenericChat;
 using PlatformLib.ui.framework;
 using PlatformLib.ui.framework.activitymanager;

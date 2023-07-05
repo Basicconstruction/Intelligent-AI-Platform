@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Intelligent_AI_Platform.fragments.platform.app.GenericChat.item"
+             xmlns:local="clr-namespace:Intelligent_AI_Platform.fragments.platform.app.GenericChat.item" xmlns:tools="clr-namespace:PlatformLib.tools;assembly=PlatformLib"
              mc:Ignorable="d" 
              Width="200" Height="30">
-    <Canvas Background="Bisque">
-        <Button Content="Stop" Background="IndianRed" Canvas.Left="64" Height="30" Width="62" HorizontalAlignment="Left" VerticalAlignment="Center"
+    <Canvas Background="Bisque" x:Name="InnerCanvas">
+        <Button x:Name="StopBt" Content="Stop" Background="Red" Canvas.Left="64" Height="30" Width="62" HorizontalAlignment="Left" VerticalAlignment="Center"
                 Click="ButtonBase_OnClick"/>
     </Canvas>
 </UserControl>

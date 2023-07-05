@@ -27,6 +27,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
         {
             if (InnerCanvas.Children.Contains(_stop))
             {
+                _stop.Dispose();
                 InnerCanvas.Children.Remove(_stop);
             }
             
