@@ -148,6 +148,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 stream?.Close();
                 return;
             }
+            const int delay = 25;
             async Task GetData(OpenAiStreamChatCompletionModel model)
             {
                 var r = model.Choices.FirstOrDefault();
@@ -155,38 +156,49 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 {
                     sb.Append(r.delta.Content);
                 }
-                FindAndInsert();
-                await Task.Delay(2);
+                await FindAndInsert();
+                await Task.Delay(delay);
             }
             async Task Done()
             {
-                FindAndInsert(true);
-                await Task.Delay(2);
+                await FindAndInsert(true);
+                await Task.Delay(delay);
             }
             async Task GetDataError(string line)
             {
                 sb.Append(line);
-                FindAndInsert();
-                await Task.Delay(2);
+                await FindAndInsert();
+                await Task.Delay(delay);
             }
 
-            void FindAndInsert(bool done=false)
+            async Task FindAndInsert(bool done=false)
             {
                 var t1 = sb.ToString();
-                var ele = _source.FirstOrDefault(I => I.Time == time);
-                if (ele != null)
+                await Task.Run(() =>
                 {
-                    var bubble = (Bubble)ele.Element;
-                    bubble.RePaint(t1,Width*0.8,done);
-                    Render();
-                }
-                else
-                {
-                    var bubble = new Bubble("assistant", Width * 0.8,
-                        ExpectedAlign.Left, t1,done);
-                    InsertBack(bubble, time);
+                    var ele = _source.FirstOrDefault(I => I.Time == time);
+                    if (ele != null)
+                    {
                         
-                }
+                        Dispatcher.Invoke(() =>
+                        {
+                            var bubble = (Bubble)ele.Element;
+                            bubble.RePaint(t1, Width * 0.8, done);
+                            Render();
+                        });
+                    }
+                    else
+                    {
+                        
+                        Dispatcher.Invoke(() =>
+                        {
+                            var bubble = new Bubble("assistant", Width * 0.8,
+                            ExpectedAlign.Left, t1, done);
+                            InsertBack(bubble, time);
+                        });
+
+                    }
+                });
             }
             while (!streamReader.EndOfStream)
             {

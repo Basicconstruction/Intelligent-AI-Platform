@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Intelligent_AI_Platform.config;
+﻿using Intelligent_AI_Platform.config;
 using System.Windows;
 using System.Windows.Controls;
 using Intelligent_AI_Platform.linker;
@@ -71,7 +70,7 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
             var parse3 = double.TryParse(RequestRate.Text, out var v3);
             if (parse3)
             {
-                _configuration.RequestRate = (int)v3;
+                _configuration.RequestRate = (double)v3;
             }
             _configuration.Key = Key.Text;
             OpenAi.ApiKey = _configuration.Key;
