@@ -1,12 +1,23 @@
 # Intelligent-AI-Platform  
+前往 https://gitee.com/bludogs/client-for-gpt-api 查看最新代码。因为github推送很不稳定。  
 使用C# wpf编写的chatgpt请求客户端。 目前支持基本的chat/completion 模型。   
 优点是即使是debug下进行编译，压缩后软件包很小，目前只有1点多m。  
 OpenAI 包是 https://github.com/anasfik/openai 的C# 迁移。 不过只迁移了部分，并且还有一些已经在chat/completion 解决的其他分块的bug。  
-对于当前的主要使用 chat/completion 的流的部分没有什么副作用呢。  
-![image](https://github.com/Basicconstruction/Intelligent-AI-Platform/assets/66370519/e4a1567e-2815-4cd7-a800-d53e73c1fa8b)
+对于当前的主要使用 chat/completion 的流的部分没有什么副作用。  
+![image](https://github.com/Basicconstruction/Intelligent-AI-Platform/assets/66370519/c315f325-9358-4c46-a7ed-ec948f935102)
+
+![image](https://github.com/Basicconstruction/Intelligent-AI-Platform/assets/66370519/fd7dd0a4-877d-4aad-a94e-78d66bfb967b)
+
 效果如上图。  
 注意这不是付费产品，你需要提供自己的Api key ，以及自己的服务商api地址。  
 目前，输出效果较差，C# 的富文本的显示效果对于格式复杂的文本显示效果并不好。  
+基本预设：  
+左侧选择另外的会话时，使用空的上下文。
+在新的回答加载完成后对所有会话信息进行存储。  
+在设置中进行“确认”或“应用”时存储设置项目。  
+发送问题时，会把问题加入上下文，回答结束（中止，完成)时把回答加入上下文。  
+
+
 
 预计支持以下特性：  
 选中消息可支持上下文操作： 从此开始作为上下文消息，移出上下文，添加到上下文，  
