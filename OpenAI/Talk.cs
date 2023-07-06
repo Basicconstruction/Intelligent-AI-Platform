@@ -15,6 +15,8 @@ namespace OpenAI
         [DataMember]
         public string Content;
 
+        [DataMember] public string Error;
+        [DataMember] public string Additional;
         public Talk()
         {
         }

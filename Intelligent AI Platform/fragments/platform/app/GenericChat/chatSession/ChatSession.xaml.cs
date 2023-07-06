@@ -41,7 +41,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             {
                 var bubble = new Bubble(talk.Participant.ToString(),
                     Vm.Width * 0.8, talk.Participant == Participant.User ? ExpectedAlign.Right : ExpectedAlign.Left,
-                    talk.Content);
+                    talk.Content+talk.Error+talk.Additional);
                 Vm.UserSource.Add(new VerticalArrangedComponentManager.InnerObject()
                 {
                     Element = bubble,

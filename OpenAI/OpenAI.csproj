@@ -108,6 +108,7 @@
     <Compile Include="core\models\functions\functions.cs" />
     <Compile Include="core\networking\client.cs" />
     <Compile Include="core\OpenAICompletionBase.cs" />
+    <Compile Include="ErrorText.cs" />
     <Compile Include="instance\chat\chat.cs" />
     <Compile Include="instance\completion\OpenAICompletion.cs" />
     <Compile Include="instance\OpenAI.cs" />

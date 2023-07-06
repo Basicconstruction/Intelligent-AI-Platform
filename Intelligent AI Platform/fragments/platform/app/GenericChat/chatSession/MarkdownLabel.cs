@@ -20,6 +20,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             get;
         }
 
+        private const int DefaultFontSize = 21;
         private bool _useMarkdown = true;
         public MarkdownLabel(string content, double designedWidth)
         {
@@ -31,8 +32,9 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             var flowDocument = Markdown.ToFlowDocument(content, pipeline);
             BorderThickness = new System.Windows.Thickness(0.0);
             // 在 RichTextBox 中显示解析后的内容
+            //FontSize = 128;
+            flowDocument.FontSize = DefaultFontSize;
             Document = flowDocument;
-            FontSize = 14;
             MaxWidth = designedWidth;
         }
 
@@ -53,6 +55,8 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 document.Blocks.Add(paragraph);
                 Document = document;
             }
+
+            Document.FontSize = DefaultFontSize;
         }
 
         public void RePaint(string content, double designedWidth=-1)

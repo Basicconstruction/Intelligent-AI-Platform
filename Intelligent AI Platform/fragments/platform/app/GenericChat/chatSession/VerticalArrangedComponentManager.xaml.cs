@@ -138,11 +138,16 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             }
             catch (Exception e)
             {
-                sb.Append("没有设置秘钥或远程服务器无法连接"+e + "-- 因为错误或异常而终止");
+                sb.Append("没有设置秘钥或远程服务器无法连接"+ "-- 因为错误或异常而终止");
                 var bubble = new Bubble("assistant", Width * 0.8,
                     ExpectedAlign.Left, sb.ToString(),true);
                 InsertBack(bubble, time);
-                var talk1 = new Talk(Participant.Assistant, sb.ToString()) { Time= DateTimeOffset.Now.ToUnixTimeMilliseconds() };
+                var talk1 = new Talk(Participant.Assistant, "")
+                {
+                    Time= DateTimeOffset.Now.ToUnixTimeMilliseconds(),
+                    Error = "没有设置秘钥或远程服务器无法连接",
+                    Additional = " 因为错误或异常而终止"
+                };
                 Parent.Session.Talks.Add(talk1);
                 //Parent.SessionContext.Talks.Add(talk1);
                 stream?.Close();
@@ -252,15 +257,19 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 }
             }
 
+            var pureSb = sb.ToString();
             if (source is { IsCancellationRequested: true })
             {
-                sb.Append("\n  " +
-                          "-------  通过令牌取消");
+                sb.Append(ErrorText.Cancel);
             }
             streamReader.Close();
             stream.Close();
             await Done();
-            var talk = new Talk(Participant.Assistant, sb.ToString()) { Time= DateTimeOffset.Now.ToUnixTimeMilliseconds() };
+            var talk = new Talk(Participant.Assistant, pureSb)
+            {
+                Time= DateTimeOffset.Now.ToUnixTimeMilliseconds(),
+                Additional = ErrorText.Cancel
+            };
             Parent.Session.Talks.Add(talk);
             Parent.SessionContext.Talks.Add(talk);
             
