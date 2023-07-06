@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Intelligent_AI_Platform.dataCenter;
 using Intelligent_AI_Platform.linker;
 using Intelligent_AI_Platform.Model.platform.app.GenericChat.chat;
 using OpenAI;
@@ -67,8 +68,16 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 InputBox.AddCancelToken(source);
                 await Vm.PutNewTask(SessionContext, time,source);
-                SessionGroup.Serialize(Linker.SessionGroup,Linker.Location);
+                SessionGroup.Serialize(DataCenter.SessionGroup,Linker.Location);
                 InputBox.RemoveStop();
+                if (Session.Theme == null || Session.Theme.Trim() == Session.DefaultTheme)
+                {
+                    Session.Theme = Session.GetTheme(Session);
+                    DataCenter.ChatList.UpdateView();
+                }
+                GC.Collect();
+                GC.WaitForFullGCComplete();
+                
                 //await Vm.PutTask(msg, time);
             };
         }

@@ -29,7 +29,7 @@ namespace Intelligent_AI_Platform.Model.platform.app.GenericChat.chat
 
         public void InsertNewSession()
         {
-            _group.Insert(0,new Session(){Theme = "新的聊天"});
+            _group.Insert(0,new Session(){Theme = Session.DefaultTheme});
         }
 
         public static void Serialize(SessionGroup sessionGroup,string location)
@@ -72,9 +72,9 @@ namespace Intelligent_AI_Platform.Model.platform.app.GenericChat.chat
             try
             {
                 var res = JsonConvert.DeserializeObject<SessionGroup>(File.ReadAllText(data));
-                if (res.Group.Count < 1)
+                if (res!=null&&res.Group.Count < 1)
                 {
-                    res.Group.Add(new Session(){Theme = "我的聊天"});
+                    res.Group.Add(new Session(){Theme = Session.DefaultTheme});
                 }
                 return res;
             }

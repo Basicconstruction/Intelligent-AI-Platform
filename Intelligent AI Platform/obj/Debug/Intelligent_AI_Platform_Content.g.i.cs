@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/message.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("kun1.ico")]
 
 

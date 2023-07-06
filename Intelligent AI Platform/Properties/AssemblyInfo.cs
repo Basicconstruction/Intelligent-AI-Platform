@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("Intelligent_AI_Platform")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("开封星羽网络科技有限公司")]
 [assembly: AssemblyProduct("Intelligent_AI_Platform")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]

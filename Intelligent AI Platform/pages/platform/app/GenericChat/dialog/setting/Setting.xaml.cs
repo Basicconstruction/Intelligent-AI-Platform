@@ -1,6 +1,7 @@
 ﻿using Intelligent_AI_Platform.config;
 using System.Windows;
 using System.Windows.Controls;
+using Intelligent_AI_Platform.dataCenter;
 using Intelligent_AI_Platform.linker;
 using OpenAI.instance;
 
@@ -11,7 +12,7 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
     /// </summary>
     public partial class Setting : Window
     {
-        private Configuration _configuration = Linker.Configuration.Copy();
+        private readonly Configuration _configuration = DataCenter.Configuration.Copy();
         public Setting()
         {
             InitializeComponent();
@@ -70,19 +71,19 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
             var parse3 = double.TryParse(RequestRate.Text, out var v3);
             if (parse3)
             {
-                _configuration.RequestRate = (double)v3;
+                _configuration.RequestRate = v3;
             }
             _configuration.Key = Key.Text;
             OpenAi.ApiKey = _configuration.Key;
             OpenAi.BaseUrl = _configuration.ProviderUrl;
-            var config = Linker.Configuration;
+            var config = DataCenter.Configuration;
             config.Model = _configuration.Model;
             config.Temperature = _configuration.Temperature;
             config.ProviderUrl = _configuration.ProviderUrl;
             config.MaxTokens = _configuration.MaxTokens;
             config.RequestRate = _configuration.RequestRate;
             config.Key = _configuration.Key;
-            Configuration.Serialize(Linker.Configuration,Linker.Location);
+            Configuration.Serialize(DataCenter.Configuration,Linker.Location);
         }
 
         private void Apply_Click(object sender, RoutedEventArgs e)

@@ -5,7 +5,7 @@ using Intelligent_AI_Platform.pages.platform.app.GenericChat;
 using PlatformLib.ui.framework;
 using PlatformLib.ui.framework.enumList;
 
-namespace Intelligent_AI_Platform.pages
+namespace Intelligent_AI_Platform.pages.platform
 {
     public partial class PlatformActivity: IActivity,ISizeBox
     {
@@ -48,9 +48,5 @@ namespace Intelligent_AI_Platform.pages
         public double SMaxHeight { get => MaxHeight; set => MaxHeight = value; }
         public double Flexibility { get => 1.0; set => throw new NotImplementedException(); }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Linker.NavigatorManager.GetActivityManager(NavigatorLabel.Root).Replace(new ChatActivity(),PutStyle.FitParent);
-        }
     }
 }

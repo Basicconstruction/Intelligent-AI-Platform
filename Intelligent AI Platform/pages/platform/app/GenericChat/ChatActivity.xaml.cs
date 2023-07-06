@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Windows.Forms;
 using Intelligent_AI_Platform.config;
+using Intelligent_AI_Platform.dataCenter;
 using Intelligent_AI_Platform.fragments.platform.app.GenericChat;
 using Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession;
 using Intelligent_AI_Platform.fragments.platform.app.GenericChat.item;
@@ -49,61 +49,68 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat
 
         public void Init()
         {
+            // 初始化字典
+            DataCenter.SessionToContext = new SessionToContext();
+            DataCenter.SessionToChatSession = new SessionToChatSession();
+            // 载入和初始化设置和对话列表
             var config = Configuration.LoadConfiguration(Linker.Location);
             if (config == null)
             {
-                Linker.Configuration = new Configuration();
-                Linker.Configuration.TurnsTo(new Configuration());
-                Configuration.Serialize(Linker.Configuration,Linker.Location);
-                if (Linker.Configuration.ProviderUrl != "")
+                DataCenter.Configuration = new Configuration();
+                DataCenter.Configuration.TurnsTo(new Configuration());
+                Configuration.Serialize(DataCenter.Configuration,Linker.Location);
+                if (DataCenter.Configuration.ProviderUrl != "")
                 {
-                    OpenAi.BaseUrl = Linker.Configuration.ProviderUrl;
+                    OpenAi.BaseUrl = DataCenter.Configuration.ProviderUrl;
                 }
 
-                if (Linker.Configuration.Key != "")
+                if (DataCenter.Configuration.Key != "")
                 {
-                    OpenAi.ApiKey = Linker.Configuration.Key;
+                    OpenAi.ApiKey = DataCenter.Configuration.Key;
                 }
             }
             else
             {
-                Linker.Configuration = config;
-                if (Linker.Configuration.ProviderUrl != "")
+                DataCenter.Configuration = config;
+                if (DataCenter.Configuration.ProviderUrl != "")
                 {
-                    OpenAi.BaseUrl = Linker.Configuration.ProviderUrl;
+                    OpenAi.BaseUrl = DataCenter.Configuration.ProviderUrl;
                 }
 
-                if (Linker.Configuration.Key != "")
+                if (DataCenter.Configuration.Key != "")
                 {
-                    OpenAi.ApiKey = Linker.Configuration.Key;
+                    OpenAi.ApiKey = DataCenter.Configuration.Key;
                 }
             }
-
             var sessionGroup = SessionGroup.LoadSessionGroup(Linker.Location);
-            if (sessionGroup == null)
-            {
-                Linker.SessionGroup = new SessionGroup();
-            }
-            else
-            {
-                Linker.SessionGroup = sessionGroup;
-            }
+            DataCenter.SessionGroup = sessionGroup ?? new SessionGroup();
 
-            if (Linker.SessionGroup.Group.Count < 1)
+            if (DataCenter.SessionGroup.Group.Count < 1)
             {
-                Linker.SessionGroup.Group.Add(new Session(){Theme = "我的聊天"});
+                DataCenter.SessionGroup.Group.Add(new Session(){Theme = Session.DefaultTheme});
             }
+            // 初始化菜单
             ChatMenu.Push(new ChatMenu(),PutStyle.FitParent);
+            // 初始化消息列表
             var chatList = new ChatList();
-            foreach (var session in Linker.SessionGroup.Group)
+            DataCenter.ChatList = chatList;
+            foreach (var session in DataCenter.SessionGroup.Group)
             {
                 chatList.ChatTopicList.Items.Add(new SessionListItem() {Session = session});
             }
             ChatList.Push(chatList,PutStyle.FitParent);
-            ChatSession.Push(new ChatSession()
+
+            //初始化 会话
+            var session1 = DataCenter.SessionGroup.Group[0];
+            var context1 = new SessionContext();
+            DataCenter.SessionToContext.Put(session1, context1);
+            var chatSession = new ChatSession()
             {
-                Session = Linker.SessionGroup.Group[0],SessionContext = new OpenAI.SessionContext()
-            },PutStyle.FitParent);
+                Session = session1, SessionContext = context1
+            };
+            ChatSession.Push(chatSession,PutStyle.FitParent);
+            DataCenter.SessionToChatSession.Put(session1,chatSession);
+            // 注册 聊天会话容器
             var navigator = Linker.NavigatorManager;
             navigator.Register(NavigatorLabel.Chat, ChatSession);
         }

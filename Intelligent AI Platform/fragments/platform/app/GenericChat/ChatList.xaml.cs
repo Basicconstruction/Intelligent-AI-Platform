@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
+using Intelligent_AI_Platform.dataCenter;
 using Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession;
 using Intelligent_AI_Platform.fragments.platform.app.GenericChat.item;
 using Intelligent_AI_Platform.linker;
@@ -28,7 +29,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat
         }
         public void Init()
         {
-            SessionGroup = Linker.SessionGroup;
+            SessionGroup = DataCenter.SessionGroup;
         }
 
         public void Destroy()
@@ -83,7 +84,38 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat
             var select = listView.SelectedIndex;
             if(select<0||select>SessionGroup.Group.Count-1) return;
             var session = SessionGroup.Group[select];
-            Linker.NavigatorManager.GetActivityManager(NavigatorLabel.Chat).Replace(new ChatSession(){Session=session,SessionContext=new SessionContext()},PutStyle.FitParent);
+            var chatSession = DataCenter.SessionToChatSession.GetChatSession(session);
+            if (chatSession != null)
+            {
+                var context = DataCenter.SessionToContext.GetContext(session);
+                if (context != null)
+                {
+                }
+                else
+                {
+                    context = new SessionContext();
+                    DataCenter.SessionToContext.Put(session,context); 
+                }
+                Linker.NavigatorManager.GetActivityManager(NavigatorLabel.Chat).Replace(chatSession,PutStyle.FitParent);
+            }
+            else
+            {
+                var context = DataCenter.SessionToContext.GetContext(session);
+                if (context != null)
+                {
+                }
+                else
+                {
+                    context = new SessionContext();
+                    DataCenter.SessionToContext.Put(session,context); 
+                }
+
+                chatSession = new ChatSession(){Session = session,SessionContext=context};
+                DataCenter.SessionToChatSession.Put(session,chatSession);
+                Linker.NavigatorManager.GetActivityManager(NavigatorLabel.Chat).Replace(chatSession,PutStyle.FitParent);
+            }
+            //var chatSession = new ChatSession() { Session = session, SessionContext = new SessionContext() };
+            //Linker.NavigatorManager.GetActivityManager(NavigatorLabel.Chat).Replace(,PutStyle.FitParent);
         }
 
         private void Settings_Click(object sender, System.Windows.RoutedEventArgs e)

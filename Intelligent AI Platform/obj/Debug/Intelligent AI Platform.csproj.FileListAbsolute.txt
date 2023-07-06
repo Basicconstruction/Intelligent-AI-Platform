@@ -66,11 +66,14 @@ C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Plat
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Serilog.dll
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Serilog.Sinks.Console.dll
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.ValueTuple.dll
-C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Tensorflow.Binding.dll
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Google.Protobuf.pdb
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Google.Protobuf.xml
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Serilog.xml
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Serilog.Sinks.Console.xml
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\System.ValueTuple.xml
-C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Tensorflow.Binding.xml
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent AI Platform.csproj.Fody.CopyLocal.cache
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Intelligent_AI_Platform.exe.manifest
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\bin\Debug\Intelligent_AI_Platform.application
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent_AI_Platform.TrustInfo.xml
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent_AI_Platform.exe.manifest
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent_AI_Platform.application

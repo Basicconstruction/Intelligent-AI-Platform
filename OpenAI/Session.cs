@@ -14,6 +14,14 @@ namespace OpenAI
             get;
         }
 
+        public static readonly string DefaultTheme = "新的聊天";
+
+        public static string GetTheme(Session session)
+        {
+            var talk = session.Talks.FirstOrDefault(t => t.Participant == Participant.User);
+            return talk?.Content;
+        }
+
         [DataMember]
         private readonly List<Talk> _talks = new List<Talk>();
 

@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using Intelligent_AI_Platform.linker;
 using Intelligent_AI_Platform.linker.manager;
-using static Tensorflow.Binding;
 using Intelligent_AI_Platform.pages.platform.app.GenericChat;
 using PlatformLib.ui.framework;
 using PlatformLib.ui.framework.activitymanager;
@@ -175,12 +174,12 @@ namespace Intelligent_AI_Platform
 
         public void Destroy()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void UpdateView()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public double PreferredWidth

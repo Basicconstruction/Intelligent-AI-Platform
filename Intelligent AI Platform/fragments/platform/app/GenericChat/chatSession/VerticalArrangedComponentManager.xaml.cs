@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Intelligent_AI_Platform.dataCenter;
 using Intelligent_AI_Platform.linker;
-using Markdig.Helpers;
 using Newtonsoft.Json;
 using OpenAI;
 using OpenAI.core.constants;
@@ -123,7 +123,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
 
         public async Task PutNewTask(SessionContext sessionContext, long time,[Optional] CancellationTokenSource source)
         {
-            var config = Linker.Configuration;
+            var config = DataCenter.Configuration;
             Stream stream = null;
             var sb = new StringBuilder();
             StreamReader streamReader = null;
@@ -144,7 +144,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 InsertBack(bubble, time);
                 var talk1 = new Talk(Participant.Assistant, sb.ToString()) { Time= DateTimeOffset.Now.ToUnixTimeMilliseconds() };
                 Parent.Session.Talks.Add(talk1);
-                Parent.SessionContext.Talks.Add(talk1);
+                //Parent.SessionContext.Talks.Add(talk1);
                 stream?.Close();
                 return;
             }
@@ -171,9 +171,21 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 await Task.Delay(delay);
             }
 
-            async Task FindAndInsert(bool done=false)
+            const int beeNum = 10;
+            var beeFlag = 0;
+            async Task FindAndInsert(bool done=false,bool bee = true)
             {
                 var t1 = sb.ToString();
+                if (!done)
+                {
+                    if (beeFlag < beeNum)
+                    {
+                        beeFlag++;
+                        return;
+                    }
+
+                    beeFlag = 0;
+                }
                 await Task.Run(() =>
                 {
                     var ele = _source.FirstOrDefault(I => I.Time == time);
@@ -193,12 +205,13 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                         Dispatcher.Invoke(() =>
                         {
                             var bubble = new Bubble("assistant", Width * 0.8,
-                            ExpectedAlign.Left, t1, done);
+                                ExpectedAlign.Left, t1, done);
                             InsertBack(bubble, time);
                         });
 
                     }
                 });
+                
             }
             while (!streamReader.EndOfStream)
             {
@@ -392,7 +405,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                         
                     }
                     await Task.Delay(20);
-                    Console.WriteLine(ExtractContent(aline));
+                    //Console.WriteLine(ExtractContent(aline));
                 }
             }
             //done
