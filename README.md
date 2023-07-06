@@ -4,9 +4,11 @@
 优点是即使是debug下进行编译，压缩后软件包很小，目前只有1点多m。  
 OpenAI 包是 https://github.com/anasfik/openai 的C# 迁移。 不过只迁移了部分，并且还有一些已经在chat/completion 解决的其他分块的bug。  
 对于当前的主要使用 chat/completion 的流的部分没有什么副作用。  
-![image](https://github.com/Basicconstruction/Intelligent-AI-Platform/assets/66370519/c315f325-9358-4c46-a7ed-ec948f935102)
+![image](https://github.com/Basicconstruction/Intelligent-AI-Platform/assets/66370519/9ea9ecb2-3ae8-4d57-875f-067b886793fc)
 
-![image](https://github.com/Basicconstruction/Intelligent-AI-Platform/assets/66370519/fd7dd0a4-877d-4aad-a94e-78d66bfb967b)
+
+![image](https://github.com/Basicconstruction/Intelligent-AI-Platform/assets/66370519/8709bc5f-4ea4-48bc-8f10-b9ee32bf9c2f)
+
 
 效果如上图。  
 注意这不是付费产品，你需要提供自己的Api key ，以及自己的服务商api地址。  
