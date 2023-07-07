@@ -20,7 +20,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             get;
         }
 
-        private const int DefaultFontSize = 21;
+        private const int DefaultFontSize = 18;
         private bool _useMarkdown = true;
         public MarkdownLabel(string content, double designedWidth)
         {

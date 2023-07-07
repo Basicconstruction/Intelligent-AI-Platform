@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using OpenAI;
 using PlatformLib.ui.framework.layout;
 
 namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
@@ -25,6 +26,11 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             public string Name;
         }
 
+        public Talk Talk
+        {
+            get;
+            set;
+        }
         public void UseMarkdown(bool useMarkdown)
         {
             _element.UseMarkdown(useMarkdown);
@@ -32,13 +38,14 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
 
         private readonly MarkdownLabel _element = null;
 
-        public Bubble(string name,double preferWidth,ExpectedAlign align,string content,bool final = true)
+        public Bubble(string name,double preferWidth,ExpectedAlign align,Talk talk,bool final = true)
         {
             ExpectedAlign = align;
             preferWidth -= BorderMarginFix;
             _innerArg.DesignWidth = preferWidth;
             _innerArg.Name = name;
-            _innerArg.Content = content;
+            Talk = talk;
+            _innerArg.Content = talk.Content+talk.Error+talk.Additional;
             _element = new MarkdownLabel(_innerArg.Content, _innerArg.DesignWidth - OtherWidgetWidth);
             _element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             _element.Arrange(new Rect(0, 0, _element.DesiredSize.Width, _element.DesiredSize.Height));
@@ -88,66 +95,11 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             canvas.Children.Add(_border);
             canvas.Children.Add(_label);
         }
-        [Obsolete]
-        public Bubble(Type type,object[] constructArgs,string name,double preferWidth,ExpectedAlign align)
+        
+        public void RePaint(double designWidth,bool done = false)
         {
-            ExpectedAlign = align;
-            preferWidth -= BorderMarginFix;
-            _innerArg.DesignWidth = preferWidth;
-            _innerArg.Content = (string)constructArgs[0];
-            _innerArg.Name = name;
-            // var args = new List<object>();
-            // args.AddRange(constructArgs);
-            
-            // args.Add(preferWidth - OtherWidgetWidth);
-            
-            // var element = (FrameworkElement)Activator.CreateInstance(type, args.ToArray());
-            _element = new MarkdownLabel(_innerArg.Content, _innerArg.DesignWidth - OtherWidgetWidth);
-            _element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-            _element.Arrange(new Rect(0, 0, _element.DesiredSize.Width, _element.DesiredSize.Height));
-            var width = _element.ActualWidth;
-            var height = _element.ActualHeight;
-            _border = new Border
-            {
-                //Background = new SolidColorBrush(Colors.Peru),
-                BorderThickness = new Thickness(2),
-                CornerRadius = new CornerRadius(5),
-                Padding = new Thickness(10),
-                BorderBrush = new SolidColorBrush(Colors.Blue),
-                Child = _element,
-                Width = width + 20,
-                Height = height + 20
-            };
-            var canvas = new Canvas();
-            _label = new Label
-            {
-                Content = name,
-                Width = 100,
-                Height = 30,
-            };  
-            if (align == ExpectedAlign.Left)
-            {
-                Width = _border.Width + OtherWidgetWidth;// 14 为字体修正
-                Canvas.SetLeft(_border, OtherWidgetWidth+ BorderMarginFix);
-                Canvas.SetLeft(_label,0);
-            }
-            else
-            {
-                Width = _border.Width + OtherWidgetWidth + BorderFix;
-                Canvas.SetRight(_border, OtherWidgetWidth+BorderFix+ BorderMarginFix);
-                Canvas.SetRight(_label,0);
-            }
-            Canvas.SetTop(_label,0);
-            Height = _border.Height + OtherWidgetHeight;
-            AddChild(canvas);
-            Canvas.SetBottom(_border, 0);
-            canvas.Children.Add(_border);
-            canvas.Children.Add(_label);
-        }
-
-        public void RePaint(string content,double designWidth,bool done = false)
-        {
-            _innerArg.Content = content;
+            _innerArg.Content = Talk.Content+Talk.Error+Talk.Additional;
+            //Talk.Content = content;
             _innerArg.DesignWidth = designWidth;
             Repaint(done);
         }

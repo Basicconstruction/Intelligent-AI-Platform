@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Intelligent_AI_Platform.dataCenter;
-using Intelligent_AI_Platform.linker;
 using Newtonsoft.Json;
 using OpenAI;
 using OpenAI.core.constants;
@@ -138,22 +135,21 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             }
             catch (Exception e)
             {
-                sb.Append("没有设置秘钥或远程服务器无法连接"+ "-- 因为错误或异常而终止");
+                var errorTalk = new Talk(Participant.Assistant, "");
+                errorTalk.Error = "没有设置秘钥或远程服务器无法连接";
+                errorTalk.Additional = "-- 因为错误或异常而终止";
+                //sb.Append("没有设置秘钥或远程服务器无法连接"+ "-- 因为错误或异常而终止");
                 var bubble = new Bubble("assistant", Width * 0.8,
-                    ExpectedAlign.Left, sb.ToString(),true);
+                    ExpectedAlign.Left, errorTalk,true);
                 InsertBack(bubble, time);
-                var talk1 = new Talk(Participant.Assistant, "")
-                {
-                    Time= DateTimeOffset.Now.ToUnixTimeMilliseconds(),
-                    Error = "没有设置秘钥或远程服务器无法连接",
-                    Additional = " 因为错误或异常而终止"
-                };
-                Parent.Session.Talks.Add(talk1);
+                
+                Parent.Session.Talks.Add(errorTalk);
                 //Parent.SessionContext.Talks.Add(talk1);
                 stream?.Close();
                 return;
             }
             const int delay = 25;
+            var talk = new Talk(Participant.Assistant, "");
             async Task GetData(OpenAiStreamChatCompletionModel model)
             {
                 var r = model.Choices.FirstOrDefault();
@@ -161,6 +157,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 {
                     sb.Append(r.delta.Content);
                 }
+                
                 await FindAndInsert();
                 await Task.Delay(delay);
             }
@@ -176,11 +173,12 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 await Task.Delay(delay);
             }
 
+            // 黏着多个字符进行界面刷新
             const int beeNum = 10;
             var beeFlag = 0;
             async Task FindAndInsert(bool done=false,bool bee = true)
             {
-                var t1 = sb.ToString();
+                talk.Content = sb.ToString();
                 if (!done)
                 {
                     if (beeFlag < beeNum)
@@ -200,7 +198,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                         Dispatcher.Invoke(() =>
                         {
                             var bubble = (Bubble)ele.Element;
-                            bubble.RePaint(t1, Width * 0.8, done);
+                            bubble.RePaint(Width * 0.8, done);
                             Render();
                         });
                     }
@@ -210,7 +208,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                         Dispatcher.Invoke(() =>
                         {
                             var bubble = new Bubble("assistant", Width * 0.8,
-                                ExpectedAlign.Left, t1, done);
+                                ExpectedAlign.Left, talk, done);
                             InsertBack(bubble, time);
                         });
 
@@ -257,195 +255,18 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 }
             }
 
-            var pureSb = sb.ToString();
             if (source is { IsCancellationRequested: true })
             {
-                sb.Append(ErrorText.Cancel);
+                //sb.Append(ErrorText.Cancel);
+                talk.Additional = ErrorText.Cancel;
             }
             streamReader.Close();
             stream.Close();
             await Done();
-            var talk = new Talk(Participant.Assistant, pureSb)
-            {
-                Time= DateTimeOffset.Now.ToUnixTimeMilliseconds(),
-                Additional = ErrorText.Cancel
-            };
             Parent.Session.Talks.Add(talk);
             Parent.SessionContext.Talks.Add(talk);
-            
-         }
-        [Obsolete]
-        public async Task PutTask(SessionContext sessionContext, long time)
-        {
-            var config = Linker.Configuration;
-            var stream = await OpenAi.Instance.Chat.CreateStream(
-                model: config.Model,
-                sessionContext.Build(config.MaxTokens),
-                temperature: config.Temperature,
-                maxTokens: config.MaxTokens
-            );
-            var sb = new StringBuilder();
-            stream.Subscribe(
-                data =>
-                {
-                    var first = data.Choices.FirstOrDefault();
-                    // Console.WriteLine(first.index);
-                    // Console.WriteLine(first.delta.Content);
-                    if (first != null)
-                    {
-                        var r = first.delta.Content;
-                        sb.Append(r);
-                    }
-
-                    var t1 = sb.ToString();
-                    var ele = _source.FirstOrDefault(I => I.Time == time);
-                    if (ele != null)
-                    {
-                        var bubble = (Bubble)ele.Element;
-                        bubble.RePaint(t1,Width*0.8);
-                        Render();
-                    }
-                    else
-                    {
-                        var bubble = new Bubble("assistant", Width * 0.8,
-                            ExpectedAlign.Left, t1);
-                        // var bubble = new Bubble(typeof(MarkdownLabel), new object[] { t1 },
-                        //     "assistant",Width*0.8,ExpectedAlign.Left);
-                        InsertBack(bubble, time);
-                        
-                    }
-                    
-                    Console.WriteLine("hello " + t1);
-                }, (e) =>
-                {
-                    sb.Append(e.Message);
-                    var t0 = sb.ToString();
-                    var ele = _source.FirstOrDefault(I => I.Time == time);
-                    if (ele != null)
-                    {
-                        var bubble = (Bubble)ele.Element;
-                        bubble.RePaint(t0,Width*0.8);
-                        Render();
-                    }
-                    else
-                    {
-                        // var bubble = new Bubble("assistant", Width * 0.8,
-                        //     ExpectedAlign.Left, t0);
-                        var bubble = new Bubble(typeof(MarkdownLabel), new object[] { t0 },
-                            "assistant",Width*0.8,ExpectedAlign.Left);
-                        InsertBack(bubble,time);
-                        
-                    }
-
-                    
-                    Console.WriteLine(e.ToString());
-                    //await Task.Delay(20);
-                }, () =>
-                {
-                    var text = sb.ToString();
-                    var ele = _source.FirstOrDefault(I => I.Time == time);
-                    if (ele != null)
-                    {
-                        var bubble = (Bubble)ele.Element;
-                        bubble.RePaint(text,Width*0.8,true);
-                        var talk = new OpenAI.Talk(OpenAI.Participant.Assistant, text);
-                        Parent.Session.Talks.Add(talk);
-                        Parent.SessionContext.Talks.Add(talk);
-                        Render();
-                        Console.WriteLine("done");
-                    }
-                }
-                );
         }
-        [Obsolete]
-        public async Task PutTask(string content, long time)
-        {
-            const string openAiApiKey = "";
 
-            var requestBody = new
-            {
-                model = "gpt-3.5-turbo",
-                messages = new[]
-                {
-                    new
-                    {
-                        role = "system",
-                        content =
-                            "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.并且使用中文回答。"
-                    },
-                    new { role = "user", content = content },
-                },
-                stream = true,
-                max_tokens = 3000,
-            };
-            var httpClient = new HttpClient();
-            var jsonContent = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8,
-                "application/json");
-            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {openAiApiKey}");
-
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://api.openai-sb.com/v1/chat/completions");
-            request.Content = jsonContent;
-
-            using var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-            var responseBodyStream = await response.Content.ReadAsStreamAsync();
-            var streamReader = new StreamReader(responseBodyStream, Encoding.UTF8);
-            IWatcher watcher = new LineWater();
-            var stringBuilder = new StringBuilder();
-            while (!streamReader.EndOfStream)
-            {
-                var aline = await streamReader.ReadLineAsync();
-
-                if (!watcher.NeedIgnore(aline))
-                {
-                    stringBuilder.Append(ExtractContent(aline));
-                    var text = stringBuilder.ToString();
-                    var ele = _source.FirstOrDefault(I => I.Time == time);
-                    if (ele != null)
-                    {
-                        var bubble = (Bubble)ele.Element;
-                        bubble.RePaint(text,Width*0.8);
-                        Render();
-                    }
-                    else
-                    {
-                        var bubble = new Bubble(typeof(MarkdownLabel), new object[] { text },
-                        "assistant",Width*0.8,ExpectedAlign.Left);
-                        InsertBack(bubble, time);
-                        
-                    }
-                    await Task.Delay(20);
-                    //Console.WriteLine(ExtractContent(aline));
-                }
-            }
-            //done
-            {
-                var text = stringBuilder.ToString();
-                var ele = _source.FirstOrDefault(I => I.Time == time);
-                if (ele != null)
-                {
-                    var bubble = (Bubble)ele.Element;
-                    bubble.RePaint(text,Width*0.8,true);
-                    var talk = new OpenAI.Talk(OpenAI.Participant.Assistant, text);
-                    Parent.Session.Talks.Add(talk);
-                    Parent.SessionContext.Talks.Add(talk);
-                    Render();
-                }
-            }
-            GC.Collect();
-            GC.WaitForFullGCComplete();
-        }
-        private static string ExtractContent(string line)
-        {
-            var regex = new Regex("\"content\":\"([^\"]+)\"");
-            var match = regex.Match(line);
-
-            if (match.Success && match.Groups.Count > 1)
-            {
-                return match.Groups[1].Value;
-            }
-
-            return "";
-        }
 
         public int InsertFront(List<FrameworkElement> list)
         {

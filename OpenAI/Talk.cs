@@ -31,6 +31,7 @@ namespace OpenAI
 
         public Talk(Participant participant, string content)
         {
+            Time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             Participant = participant;
             switch (Participant)
             {

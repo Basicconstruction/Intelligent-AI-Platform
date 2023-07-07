@@ -41,7 +41,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             {
                 var bubble = new Bubble(talk.Participant.ToString(),
                     Vm.Width * 0.8, talk.Participant == Participant.User ? ExpectedAlign.Right : ExpectedAlign.Left,
-                    talk.Content+talk.Error+talk.Additional);
+                    talk);
                 Vm.UserSource.Add(new VerticalArrangedComponentManager.InnerObject()
                 {
                     Element = bubble,
@@ -64,7 +64,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 var time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 var source = new CancellationTokenSource();
                 Vm.InsertBack(new Bubble("user",Vm.Width*0.8,
-                    ExpectedAlign.Right,talk.Content),time,true);
+                    ExpectedAlign.Right,talk),time,true);
                 time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 InputBox.AddCancelToken(source);
                 await Vm.PutNewTask(SessionContext, time,source);
