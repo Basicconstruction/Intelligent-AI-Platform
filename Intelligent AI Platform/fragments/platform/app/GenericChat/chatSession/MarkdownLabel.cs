@@ -21,7 +21,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
         }
 
         private const int DefaultFontSize = 18;
-        private bool _useMarkdown = true;
+        public bool UseMarkdownFlag = true;
         public MarkdownLabel(string content, double designedWidth)
         {
             DesignedWidth = designedWidth;
@@ -40,7 +40,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
 
         public void UseMarkdown(bool useMarkdown)
         {
-            _useMarkdown = useMarkdown;
+            UseMarkdownFlag = useMarkdown;
             if (useMarkdown)
             {
                 var content = OriginalText.Replace("\\n", "\n");
@@ -67,7 +67,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 DesignedWidth = designedWidth;
                 MaxWidth = designedWidth;
             }
-            UseMarkdown(_useMarkdown);
+            UseMarkdown(UseMarkdownFlag);
         }
     }
 }

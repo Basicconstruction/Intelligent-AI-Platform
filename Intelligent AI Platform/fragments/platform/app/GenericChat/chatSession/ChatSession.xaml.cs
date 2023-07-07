@@ -41,7 +41,9 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             {
                 var bubble = new Bubble(talk.Participant.ToString(),
                     Vm.Width * 0.8, talk.Participant == Participant.User ? ExpectedAlign.Right : ExpectedAlign.Left,
-                    talk);
+                    talk)
+                { Vm = Vm
+                };
                 Vm.UserSource.Add(new VerticalArrangedComponentManager.InnerObject()
                 {
                     Element = bubble,
@@ -64,7 +66,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 var time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 var source = new CancellationTokenSource();
                 Vm.InsertBack(new Bubble("user",Vm.Width*0.8,
-                    ExpectedAlign.Right,talk),time,true);
+                    ExpectedAlign.Right,talk){Vm = Vm},time,true);
                 time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 InputBox.AddCancelToken(source);
                 await Vm.PutNewTask(SessionContext, time,source);
@@ -75,6 +77,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                     Session.Theme = Session.GetTheme(Session);
                     DataCenter.ChatList.UpdateView();
                 }
+                Vm.ContextPaint();
                 GC.Collect();
                 GC.WaitForFullGCComplete();
                 
@@ -84,12 +87,12 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
 
         public void Destroy()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void UpdateView()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public double PreferredWidth

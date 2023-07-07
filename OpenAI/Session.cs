@@ -41,6 +41,15 @@ namespace OpenAI
             }
             _talks.Add(talk);
         }
-        
+
+        public List<Talk> BuildContextFrom(Talk talk)
+        {
+            var index = _talks.FindIndex(t => t == talk);
+            return index == -1 ?
+                // The talk was not found in the list
+                new List<Talk>() : // Return an empty list
+                _talks.GetRange(index, _talks.Count - index);
+        }
+
     }
 }

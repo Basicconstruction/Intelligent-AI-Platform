@@ -52,5 +52,6 @@ namespace Intelligent_AI_Platform.dataCenter
             get => (SessionToContext)Application.Current.Properties[SessionToContextKey];
             set => Application.Current.Properties[SessionToContextKey] = value;
         }
+        
     }
 }

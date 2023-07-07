@@ -1,16 +1,17 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Intelligent_AI_Platform.linker;
 using OpenAI;
 using PlatformLib.ui.framework.layout;
+using Label = System.Windows.Controls.Label;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
 {
     public sealed class Bubble:UserControl,IExpectedPosition
     {
         private const double OtherWidgetHeight = 30;
-
         private const double OtherWidgetWidth = 10;
         private const double BorderFix = 14;
         private const double BorderMarginFix = 60;
@@ -18,7 +19,20 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
         private readonly Border _border;
         private readonly Label _label;
         private readonly InnerArgs _innerArg = new InnerArgs();
+        private VerticalArrangedComponentManager _verticalArrangedComponentManager;
+        public VerticalArrangedComponentManager Vm
+        {
+            get => _verticalArrangedComponentManager;
+            set
+            {
+                _verticalArrangedComponentManager = value;
+                InitContext();
+            }
+        }
 
+        private ChatSession ChatSession => Vm?.Parent;
+        private Session Session => Vm?.Parent.Session;
+        private SessionContext SessionContext => Vm?.Parent.SessionContext;
         private class InnerArgs
         {
             public string Content;
@@ -26,14 +40,106 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             public string Name;
         }
 
+        public void InitContext()
+        {
+            var menu = new ContextMenu();
+            var item1 = new MenuItem()
+            {
+                Header = "从此项开始作为上下文",
+            };
+            var item2 = new MenuItem()
+            {
+                Header = "将此项添加到上下文"
+            };
+            var item3 = new MenuItem()
+            {
+                Header = "将此项移出上下文"
+            };
+            var item4 = new MenuItem()
+            {
+                Header = "显示原文",
+            };
+            var item5 = new MenuItem()
+            {
+                Header = "复制原文"
+            };
+            var item6 = new MenuItem()
+            {
+                Header = "使用Markdown格式显示"
+            };
+            item1.Click += (sender, args) =>
+            {
+                SessionContext.Clear();
+                SessionContext.AddContext(Session.BuildContextFrom(Talk));
+                Vm.ContextPaint();
+            };
+            item2.Click += (sender, args) =>
+            {
+                SessionContext.AddContext(Talk);
+                Vm.ContextPaint(this,true);
+            };
+            item3.Click += (sender, args) =>
+            {
+                SessionContext.RemoveContext(Talk);
+                Vm.ContextPaint(this,false);
+            };
+            item4.Click += (sender, args) =>
+            {
+                UseMarkdown(false);
+                Vm.ElementReArrange(this);
+            };
+            item5.Click += (sender, args) =>
+            {
+                Clipboard.SetText(Talk.Content);
+            };
+            item6.Click += (sender, args) =>
+            {
+                UseMarkdown(true);
+                Vm.ElementReArrange(this);
+            };
+            menu.Items.Add(item5);
+            menu.Items.Add(item4);
+            menu.Items.Add(item6);
+            menu.Items.Add(item1);
+            menu.Items.Add(item2);
+            menu.Items.Add(item3);
+            ContextMenu = menu;
+        }
+
         public Talk Talk
         {
             get;
             set;
         }
-        public void UseMarkdown(bool useMarkdown)
+
+        private bool _markAsContext = false;
+
+        public bool MarkAsContext
         {
-            _element.UseMarkdown(useMarkdown);
+            get => _markAsContext;
+            set
+            {
+                _markAsContext = value;
+                if (value)
+                {
+                    _border.BorderThickness = new Thickness(4);
+                    _border.BorderBrush = Linker.ContextBrush;
+                }
+                else
+                {
+                    _border.BorderThickness = new Thickness(2);
+                    _border.BorderBrush = Linker.NotContextBrush;
+                }
+            }
+        }
+
+        private void UseMarkdown(bool useMarkdown)
+        {
+            if (_element.UseMarkdownFlag != useMarkdown)
+            {
+                _element.UseMarkdown(useMarkdown);
+                Repaint(true);
+            }
         }
 
         private readonly MarkdownLabel _element = null;
@@ -94,6 +200,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             Canvas.SetBottom(_border, 0);
             canvas.Children.Add(_border);
             canvas.Children.Add(_label);
+            //InitContext();
         }
         
         public void RePaint(double designWidth,bool done = false)

@@ -25,26 +25,14 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
     {
         private List<InnerObject> _source = new List<InnerObject>();
 
-        public class  InnerObject
+        public class InnerObject
         {
-            public FrameworkElement Element
-            {
-                set;
-                get;
-            }
+            public FrameworkElement Element { set; get; }
 
-            public long Time
-            {
-                set;
-                get;
-            }
+            public long Time { set; get; }
         }
 
-        public new ChatSession Parent
-        {
-            set;
-            get;
-        }
+        public new ChatSession Parent { set; get; }
         private double _viewPosition;
         private double _renderHeight;
         private volatile bool _needScrollToEnd = true;
@@ -62,7 +50,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             set
             {
                 _source = value;
-                
+
                 if (_changeCount > 0)
                 {
                     _needScrollToEnd = false;
@@ -74,33 +62,35 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             }
             get => _source;
         }
+
         private Mutex _mutex = new Mutex();
 
-        public void InsertBack(FrameworkElement frameworkElement, long time,bool end = false)
+        public void InsertBack(FrameworkElement frameworkElement, long time, bool end = false)
         {
             //var scrollViewer = FindVisualChild<ScrollViewer>(this);
 
             //获取当前滚动位置的偏移量
             //var offset = scrollViewer.ContentVerticalOffset;
-           // _mutex.WaitOne();
+            // _mutex.WaitOne();
             var innerObject = _source.FirstOrDefault(i => i.Time == time);
             if (innerObject == null)
             {
-                _source.Add(new InnerObject(){Element = frameworkElement,Time = time});
+                _source.Add(new InnerObject() { Element = frameworkElement, Time = time });
             }
             else
             {
                 innerObject.Element = frameworkElement;
             }
+
             Render();
             //await Task.Delay(20);
             //_mutex.ReleaseMutex();
             //_viewPosition = (int)(offset);
             //scrollViewer.ScrollToVerticalOffset(_viewPosition);
-           // return 1;
+            // return 1;
         }
 
-        
+
         public int InsertBack(List<FrameworkElement> list)
         {
             var scrollViewer = FindVisualChild<ScrollViewer>(this);
@@ -109,16 +99,17 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             var offset = scrollViewer.ContentVerticalOffset;
             foreach (var element in list)
             {
-                _source.Add(new InnerObject(){Element = element});
+                _source.Add(new InnerObject() { Element = element });
             }
-            
+
             _viewPosition = (int)(offset);
             Render();
             scrollViewer.ScrollToVerticalOffset(_viewPosition);
             return list.Count;
         }
 
-        public async Task PutNewTask(SessionContext sessionContext, long time,[Optional] CancellationTokenSource source)
+        public async Task PutNewTask(SessionContext sessionContext, long time,
+            [Optional] CancellationTokenSource source)
         {
             var config = DataCenter.Configuration;
             Stream stream = null;
@@ -140,16 +131,18 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 errorTalk.Additional = "-- 因为错误或异常而终止";
                 //sb.Append("没有设置秘钥或远程服务器无法连接"+ "-- 因为错误或异常而终止");
                 var bubble = new Bubble("assistant", Width * 0.8,
-                    ExpectedAlign.Left, errorTalk,true);
+                    ExpectedAlign.Left, errorTalk, true) { Vm = this };
                 InsertBack(bubble, time);
-                
+
                 Parent.Session.Talks.Add(errorTalk);
                 //Parent.SessionContext.Talks.Add(talk1);
                 stream?.Close();
                 return;
             }
+
             const int delay = 25;
             var talk = new Talk(Participant.Assistant, "");
+
             async Task GetData(OpenAiStreamChatCompletionModel model)
             {
                 var r = model.Choices.FirstOrDefault();
@@ -157,15 +150,17 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 {
                     sb.Append(r.delta.Content);
                 }
-                
+
                 await FindAndInsert();
                 await Task.Delay(delay);
             }
+
             async Task Done()
             {
                 await FindAndInsert(true);
                 await Task.Delay(delay);
             }
+
             async Task GetDataError(string line)
             {
                 sb.Append(line);
@@ -176,7 +171,8 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             // 黏着多个字符进行界面刷新
             const int beeNum = 10;
             var beeFlag = 0;
-            async Task FindAndInsert(bool done=false,bool bee = true)
+
+            async Task FindAndInsert(bool done = false, bool bee = true)
             {
                 talk.Content = sb.ToString();
                 if (!done)
@@ -189,12 +185,13 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
 
                     beeFlag = 0;
                 }
+
                 await Task.Run(() =>
                 {
                     var ele = _source.FirstOrDefault(I => I.Time == time);
                     if (ele != null)
                     {
-                        
+
                         Dispatcher.Invoke(() =>
                         {
                             var bubble = (Bubble)ele.Element;
@@ -204,29 +201,31 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                     }
                     else
                     {
-                        
+
                         Dispatcher.Invoke(() =>
                         {
                             var bubble = new Bubble("assistant", Width * 0.8,
-                                ExpectedAlign.Left, talk, done);
+                                ExpectedAlign.Left, talk, done) { Vm = this };
                             InsertBack(bubble, time);
                         });
 
                     }
                 });
-                
+
             }
+
             while (!streamReader.EndOfStream)
             {
                 if (source is { IsCancellationRequested: true })
                 {
                     break;
                 }
+
                 string line = null;
                 try
                 {
                     line = await streamReader.ReadLineAsync();
-                   // Console.WriteLine(line);
+                    // Console.WriteLine(line);
                 }
                 catch (Exception e)
                 {
@@ -260,6 +259,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 //sb.Append(ErrorText.Cancel);
                 talk.Additional = ErrorText.Cancel;
             }
+
             streamReader.Close();
             stream.Close();
             await Done();
@@ -278,8 +278,9 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             list.Reverse();
             foreach (var element in list)
             {
-                _source.Insert(0,new InnerObject(){Element = element});
+                _source.Insert(0, new InnerObject() { Element = element });
             }
+
             var ih = list.Sum(item => item.Height);
             _viewPosition = (int)(ih + offset);
             Render();
@@ -306,10 +307,8 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
         public void Render()
         {
             LayoutMargin = 25;
-            //var renderWidth = ActualWidth;
             var renderWidth = Width;
             var renderPosition = 25d;
-            //Console.WriteLine("FFFF count: "+_source.Count);
             foreach (var inner in _source)
             {
                 var item = inner.Element;
@@ -325,6 +324,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                         {
                             InnerCanvas.Children.Add(item);
                         }
+
                         break;
                     case ExpectedAlign.Center:
                         Canvas.SetLeft(item, 1.0d * (renderWidth - item.Width) / 2);
@@ -334,6 +334,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                         {
                             InnerCanvas.Children.Add(item);
                         }
+
                         break;
                     case ExpectedAlign.Right:
                         Canvas.SetRight(item, 0);
@@ -343,12 +344,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                         {
                             InnerCanvas.Children.Add(item);
                         }
-                        break;
-                    case ExpectedAlign.Default:
-                        break;
-                    case ExpectedAlign.Start:
-                        break;
-                    case ExpectedAlign.End:
+
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -393,8 +389,9 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             InnerScroll.ScrollToBottom();
             foreach (var innerObject in _source)
             {
-                ((Bubble)innerObject.Element).ReArrange(Width*0.8);
+                ((Bubble)innerObject.Element).ReArrange(Width * 0.8);
             }
+
             Render();
             // _needMarkPosition = true;
             //Console.WriteLine("空间高度变化");
@@ -409,18 +406,85 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 // Console.WriteLine("Log: view at"+_viewPosition);
             }
         }
+
         static Dictionary<string, dynamic> DecodeToMap(string responseBody)
         {
             try
             {
-                // 未验证
                 return JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(responseBody);
             }
             catch (Exception e)
             {
                 return null;
-                throw new Exception(e.ToString());
             }
+        }
+
+        public void ContextPaint()
+        {
+            foreach (var innerObject in _source)
+            {
+                var bubble = (Bubble)innerObject.Element;
+                bubble.MarkAsContext = Parent.SessionContext.Talks.Contains(bubble.Talk);
+            }
+        }
+
+        public void ContextPaint(Bubble bubble, bool isContext = true)
+        {
+            bubble.MarkAsContext = isContext;
+        }
+
+        public void ElementReArrange(Bubble bubble)
+        {
+            LayoutMargin = 25;
+            var renderWidth = Width;
+            var renderPosition = 25d;
+            var startPartRender = false;
+            foreach (var inner in _source)
+            {
+                var item = inner.Element;
+                if (startPartRender == false)
+                {
+                    startPartRender = (Bubble)item == bubble;
+                }
+                if (!(item is IExpectedPosition ep)) continue;
+                switch (ep.ExpectedAlign)
+                {
+                    case ExpectedAlign.Left:
+                        if (startPartRender)
+                        {
+                            Canvas.SetLeft(item, 0d);
+                            Canvas.SetTop(item, renderPosition);
+                        }
+
+                        renderPosition += item.Height + LayoutMargin;
+
+                        break;
+                    case ExpectedAlign.Center:
+                        if (startPartRender)
+                        {
+                            Canvas.SetLeft(item, 1.0d * (renderWidth - item.Width) / 2);
+                            Canvas.SetTop(item, renderPosition);
+                        }
+
+                        renderPosition += item.Height + LayoutMargin;
+
+                        break;
+                    case ExpectedAlign.Right:
+                        if (startPartRender)
+                        {
+                            Canvas.SetRight(item, 0);
+                            Canvas.SetTop(item, renderPosition);
+                        }
+
+                        renderPosition += item.Height + LayoutMargin;
+
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            InnerCanvas.Height = renderPosition;
+            _renderHeight = renderPosition;
         }
     }
 }
