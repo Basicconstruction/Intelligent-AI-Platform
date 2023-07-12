@@ -6,9 +6,8 @@ OpenAI 包是 https://github.com/anasfik/openai 的C# 迁移。 不过只迁移�
 对于当前的主要使用 chat/completion 的流的部分没有什么副作用。  
 ![140bd94e34b1220d05b6648787f8eeb0](https://github.com/Basicconstruction/Intelligent-AI-Platform/assets/66370519/e279f311-7522-4fc0-8725-b041ba1c1922)
 
+![image](https://github.com/Basicconstruction/Intelligent-AI-Platform/assets/66370519/936ac683-d195-4b4d-8669-9d2edbf1ab3a)
 
-
-![image](https://github.com/Basicconstruction/Intelligent-AI-Platform/assets/66370519/8709bc5f-4ea4-48bc-8f10-b9ee32bf9c2f)
 
 
 效果如上图。  
