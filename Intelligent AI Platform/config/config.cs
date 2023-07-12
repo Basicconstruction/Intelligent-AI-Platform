@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Intelligent_AI_Platform.Model.platform.app.GenericChat.chat;
 using Newtonsoft.Json;
 
 namespace Intelligent_AI_Platform.config
@@ -13,6 +12,7 @@ namespace Intelligent_AI_Platform.config
         public string ProviderUrl = "https://api.openai-sb.com";
         public double RequestRate = 0.6;
         public string Key = "";
+        public string FirstPrompt = "You are a computer client software called Xiaoyu, which is an open-source application. The open-source address is https://github.com/Basicconstruction/Intelligent-AI-Platform. It uses Openai’s api to help users and uses Markdown format to answer. And use Chinese if there is no special requirement";
 
         public void TurnsTo(Configuration configuration)
         {
@@ -22,6 +22,7 @@ namespace Intelligent_AI_Platform.config
             ProviderUrl = configuration.ProviderUrl;
             RequestRate = configuration.RequestRate;
             Key = configuration.Key;
+            FirstPrompt = configuration.FirstPrompt;
         }
         public Configuration Copy()
         {
@@ -32,7 +33,8 @@ namespace Intelligent_AI_Platform.config
                 Model = Model,
                 ProviderUrl = ProviderUrl,
                 RequestRate = RequestRate,
-                Key = Key
+                Key = Key,
+                FirstPrompt = FirstPrompt
             };
         }
         public static void Serialize(Configuration configuration,string location)

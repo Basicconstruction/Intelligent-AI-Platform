@@ -1,5 +1,4 @@
-﻿using System.Net.Mime;
-using System.Windows;
+﻿using System.Windows;
 using Intelligent_AI_Platform.config;
 using Intelligent_AI_Platform.fragments.platform.app.GenericChat;
 using Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession;

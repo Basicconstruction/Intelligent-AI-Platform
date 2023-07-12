@@ -1,8 +1,10 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Intelligent_AI_Platform.fragments.platform.app.GenericChat.item;
 
 namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
@@ -11,6 +13,12 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
     public partial class InputBox
     {
         public event Send Send;
+
+        public new ChatSession Parent
+        {
+            set;
+            get;
+        }
         public InputBox()
         {
             InitializeComponent();
@@ -103,6 +111,31 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             }
             // Console.WriteLine("CTRL + ENTER pressed!");
             
+        }
+
+        private void ClearContextButtonClick(object sender, RoutedEventArgs e)
+        {
+            var contextSession = Parent?.SessionContext;
+            contextSession?.Clear();
+            Parent?.Vm?.ContextPaint();
+        }
+
+        private void UseContextSwitchClick(object sender, RoutedEventArgs e)
+        {
+            if(Parent==null) return;
+            if (Parent.UseContext)
+            {
+                // switch to false
+                Parent.UseContext = false;
+                ((Image)UseContext.Content).Source = new BitmapImage(new Uri("/images/red.png",UriKind.Relative));
+                UseContext.ToolTip = "连续对话已经关闭，点击开启连续对话";
+            }
+            else
+            {
+                Parent.UseContext = true;
+                ((Image)UseContext.Content).Source = new BitmapImage(new Uri("/images/green.png",UriKind.Relative));
+                UseContext.ToolTip = "连续对话已经开启，点击关闭连续对话";
+            }
         }
     }
 }

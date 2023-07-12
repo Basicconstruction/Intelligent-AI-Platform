@@ -25,6 +25,12 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
         }
 
         private Session _session;
+        private bool _useContext = true;
+        public bool UseContext
+        {
+            get => _useContext;
+            set => _useContext = value; 
+        }
         public Session Session
         {
             set
@@ -57,10 +63,16 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
         public void Init()
         {
             Vm.Parent = this;
+            InputBox.Parent = this;
             InputBox.Send += async msg =>
             {
                 //var config = Linker.Configuration;
                 var talk = new Talk(Participant.User, msg) { Time= DateTimeOffset.Now.ToUnixTimeMilliseconds() };
+                if (!UseContext)
+                {
+                    SessionContext.Clear();
+                    Vm.ContextPaint();
+                }
                 Session.Talks.Add(talk);
                 SessionContext.AddContext(talk);
                 var time = DateTimeOffset.Now.ToUnixTimeMilliseconds();

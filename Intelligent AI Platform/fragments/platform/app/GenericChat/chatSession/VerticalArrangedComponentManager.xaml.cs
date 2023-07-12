@@ -63,7 +63,6 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             get => _source;
         }
 
-        private Mutex _mutex = new Mutex();
 
         public void InsertBack(FrameworkElement frameworkElement, long time, bool end = false)
         {
@@ -113,12 +112,13 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
         {
             var config = DataCenter.Configuration;
             Stream stream = null;
-            var sb = new StringBuilder();
-            StreamReader streamReader = null;
+            var contentSb = new StringBuilder();
+            StreamReader streamReader;
             try
             {
+                var firstPrompt = DataCenter.Configuration.FirstPrompt;
                 stream = await OpenAi.Instance.Chat.CreateStream2(model: config.Model,
-                    sessionContext.Build(config.MaxTokens),
+                    sessionContext.Build(config.MaxTokens,firstPrompt),
                     // null,
                     temperature: config.Temperature,
                     maxTokens: config.MaxTokens);
@@ -126,9 +126,11 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             }
             catch (Exception e)
             {
-                var errorTalk = new Talk(Participant.Assistant, "");
-                errorTalk.Error = "没有设置秘钥或远程服务器无法连接";
-                errorTalk.Additional = "-- 因为错误或异常而终止";
+                var errorTalk = new Talk(Participant.Assistant, "")
+                {
+                    Error = "没有设置秘钥或远程服务器无法连接",
+                    Additional = "-- 因为错误或异常而终止"
+                };
                 //sb.Append("没有设置秘钥或远程服务器无法连接"+ "-- 因为错误或异常而终止");
                 var bubble = new Bubble("assistant", Width * 0.8,
                     ExpectedAlign.Left, errorTalk, true) { Vm = this };
@@ -143,12 +145,14 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             const int delay = 25;
             var talk = new Talk(Participant.Assistant, "");
 
+            // api error
+            var apiError = false;
             async Task GetData(OpenAiStreamChatCompletionModel model)
             {
                 var r = model.Choices.FirstOrDefault();
                 if (r != null)
                 {
-                    sb.Append(r.delta.Content);
+                    contentSb.Append(r.delta.Content);
                 }
 
                 await FindAndInsert();
@@ -163,7 +167,10 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
 
             async Task GetDataError(string line)
             {
-                sb.Append(line);
+                //sb.Append(line);
+                //error
+                apiError = true;
+                talk.Error = line;
                 await FindAndInsert();
                 await Task.Delay(delay);
             }
@@ -171,10 +178,11 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             // 黏着多个字符进行界面刷新
             const int beeNum = 10;
             var beeFlag = 0;
+            
 
             async Task FindAndInsert(bool done = false, bool bee = true)
             {
-                talk.Content = sb.ToString();
+                talk.Content = contentSb.ToString();
                 if (!done)
                 {
                     if (beeFlag < beeNum)
@@ -264,7 +272,11 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             stream.Close();
             await Done();
             Parent.Session.Talks.Add(talk);
-            Parent.SessionContext.Talks.Add(talk);
+            // 如果出现了api error 不添加到上下文
+            if (!apiError)
+            {
+                Parent.SessionContext.Talks.Add(talk);
+            }
         }
 
 

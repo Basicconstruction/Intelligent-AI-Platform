@@ -10,7 +10,7 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
     /// <summary>
     /// Setting.xaml 的交互逻辑
     /// </summary>
-    public partial class Setting : Window
+    public partial class Setting
     {
         private readonly Configuration _configuration = DataCenter.Configuration.Copy();
         public Setting()
@@ -37,6 +37,7 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
                     break;
             }
             Key.Text = _configuration.Key;
+            FirstPrompt.Text = _configuration.FirstPrompt;
         }
 
         private void Official_Selected(object sender, RoutedEventArgs e)
@@ -73,6 +74,8 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
             {
                 _configuration.RequestRate = v3;
             }
+
+            _configuration.FirstPrompt = FirstPrompt.Text;
             _configuration.Key = Key.Text;
             OpenAi.ApiKey = _configuration.Key;
             OpenAi.BaseUrl = _configuration.ProviderUrl;
@@ -83,6 +86,7 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
             config.MaxTokens = _configuration.MaxTokens;
             config.RequestRate = _configuration.RequestRate;
             config.Key = _configuration.Key;
+            config.FirstPrompt = _configuration.FirstPrompt;
             Configuration.Serialize(DataCenter.Configuration,Linker.Location);
         }
 

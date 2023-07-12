@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI.core.based.entity;
 using OpenAI.core.models.chat.submodels.choices.submodels;
 using OpenAI.instance;
 
@@ -55,12 +56,22 @@ namespace OpenAI
             }
         }
 
-        public List<OpenAiChatCompletionChoiceMessageModel> Build(int maxTokens)
+        public List<OpenAiChatCompletionChoiceMessageModel> Build(int maxTokens,string firstPrompt=null)
         {
             var inputTokenLimit = (int)(OpenAi.InputTokenLimit*maxTokens);
             var current = 0;
             var output = new List<OpenAiChatCompletionChoiceMessageModel>();
             var it = Talks.Count-1;
+            if (firstPrompt != null)
+            {
+                var token = CalculateTokens(firstPrompt);
+                current += token;
+                output.Add(new OpenAiChatCompletionChoiceMessageModel(
+                    role:OpenAiChatMessageRole.System,
+                    content: firstPrompt));
+            }
+
+            var insertId = output.Count;
             while (current <= inputTokenLimit&&it>=0)
             {
                 var least = inputTokenLimit - current;
@@ -68,7 +79,7 @@ namespace OpenAI
                 var nextToken = CalculateTokens(talk.Content);
                 if (nextToken < least)
                 {
-                    output.Insert(0,new OpenAiChatCompletionChoiceMessageModel(
+                    output.Insert(insertId,new OpenAiChatCompletionChoiceMessageModel(
                         role: OpenAiChatCompletionChoiceMessageModel.Parse(talk.Participant.ToString()),
                         talk.Content
                         ));
@@ -87,12 +98,19 @@ namespace OpenAI
 
         private static int CalculateTokens(string content)
         {
-            var res = 0;
+            var res = 0.0;
             foreach (var c in content)
             {
                 if (Convert.ToInt32(c) < 128)
                 {
-                    res += 1;
+                    if (c == '\n' || c == ' ' || c == '\r')
+                    {
+                        res += 1;
+                    }
+                    else
+                    {
+                        res += 0.25;
+                    }
                 }
                 else
                 {
@@ -100,7 +118,7 @@ namespace OpenAI
                 }
             }
 
-            return res;
+            return (int)res;
         }
     }
 }

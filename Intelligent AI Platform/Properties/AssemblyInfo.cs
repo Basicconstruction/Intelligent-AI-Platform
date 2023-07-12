@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Intelligent_AI_Platform")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("这是一个Chatgpt api的客户端程序，使用C# 的wpf技术开发。开源于github和gitee。")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("开封星羽网络科技有限公司")]
 [assembly: AssemblyProduct("Intelligent_AI_Platform")]
