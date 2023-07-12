@@ -37,6 +37,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             {
                 _stop.Dispose();
                 InnerCanvas.Children.Remove(_stop);
+                _stop = null;
             }
             
         }
@@ -66,6 +67,11 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
         private void MessageInputSizeChanged(object sender, SizeChangedEventArgs e)
         {
             TextArea.Width = ActualWidth - 37 * 2;
+            if (_stop != null)
+            {
+                _stop.SetValue(Canvas.LeftProperty, 1.0*(Width / 2 - _stop.Width / 2));
+            }
+            
         }
 
         private void SendMessageInArea(object sender, RoutedEventArgs e)
