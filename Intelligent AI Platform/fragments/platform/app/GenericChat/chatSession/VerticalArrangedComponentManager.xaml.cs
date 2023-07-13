@@ -63,6 +63,13 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             get => _source;
         }
 
+        public void Clear()
+        {
+            InnerCanvas.Children.Clear();
+            _source.Clear();
+            Render();
+        }
+
 
         public void InsertBack(FrameworkElement frameworkElement, long time, bool end = false)
         {

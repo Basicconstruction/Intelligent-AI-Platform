@@ -199,9 +199,10 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             }
             else
             {
+                _label.HorizontalContentAlignment = HorizontalAlignment.Right;
                 Width = _border.Width + OtherWidgetWidth + BorderFix+BorderMarginFix;
                 Canvas.SetRight(_border, OtherWidgetWidth+BorderFix+ BorderMarginFix);
-                Canvas.SetRight(_label,0);
+                Canvas.SetRight(_label,BorderFix);
             }
             Canvas.SetTop(_label,0);
             Height = _border.Height + OtherWidgetHeight;

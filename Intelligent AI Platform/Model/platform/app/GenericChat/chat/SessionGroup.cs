@@ -27,6 +27,14 @@ namespace Intelligent_AI_Platform.Model.platform.app.GenericChat.chat
             _group.RemoveAt(index);
         }
 
+        public void RemoveSession(Session session)
+        {
+            if (_group.Contains(session))
+            {
+                _group.Remove(session);
+            }
+        }
+
         public void InsertNewSession()
         {
             _group.Insert(0,new Session(){Theme = Session.DefaultTheme});

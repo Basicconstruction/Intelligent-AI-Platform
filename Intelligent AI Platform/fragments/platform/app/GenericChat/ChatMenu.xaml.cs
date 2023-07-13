@@ -22,36 +22,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat
 
         public void Init()
         {
-            var fileContextMenu = new ContextMenu();
-            var setting = new MenuItem
-            {
-                Header = "首选项",
-            };
-            setting.Click += (sender, args) =>
-            {
-                
-            };
-            var open = new MenuItem
-            {
-                Header = "打开",
-            };
-            open.Click += (sender, args) =>
-            {
-
-            };
-            fileContextMenu.Items.Add(setting);
-            fileContextMenu.Items.Add(open);
-            fileContextMenu.Placement = PlacementMode.MousePoint;
-            File.ContextMenu = fileContextMenu;
-            File.Click += (sender, args) =>
-            {
-                var mousePosition = Mouse.GetPosition(this); // 获取鼠标位置
-                const double offsetY = 10; // 向下偏移距离
-
-                fileContextMenu.Placement = PlacementMode.MousePoint;
-                fileContextMenu.VerticalOffset =  offsetY;
-                fileContextMenu.IsOpen = true;
-            };
+            
         }
 
         public void Destroy()
@@ -80,5 +51,10 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat
         public double SMinHeight { get => MinHeight; set => MinHeight = value; }
         public double SMaxHeight { get => MaxHeight; set => MaxHeight = value; }
         public double Flexibility { get => 1.0; set => throw new NotImplementedException(); }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

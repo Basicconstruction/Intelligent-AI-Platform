@@ -39,10 +39,21 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat
 
         public void UpdateView()
         {
+            
+        }
+
+        // ReSharper disable once MethodOverloadWithOptionalParameter
+        public new void UpdateView(bool change = false)
+        {
             ChatTopicList.Items.Clear();
             foreach (var session in SessionGroup.Group)
             {
                 ChatTopicList.Items.Add(new SessionListItem() {Session = session});
+            }
+
+            if (change)
+            {
+                ChatTopicList.SelectedIndex = 0;
             }
         }
 

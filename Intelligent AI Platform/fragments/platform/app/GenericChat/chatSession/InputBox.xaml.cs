@@ -2,10 +2,14 @@
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Intelligent_AI_Platform.fragments.platform.app.GenericChat.item;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+using MessageBox = System.Windows.MessageBox;
+using MessageBoxOptions = System.Windows.MessageBoxOptions;
 
 namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
 {
@@ -142,6 +146,22 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 ((Image)UseContext.Content).Source = new BitmapImage(new Uri("/images/green.png",UriKind.Relative));
                 UseContext.ToolTip = "连续对话已经开启，点击关闭连续对话";
             }
+        }
+
+        private void ClearSession(object sender, RoutedEventArgs e)
+        {
+            // 显示对话框
+            var result = MessageBox.Show("确认要清空会话吗？你无法撤销该操作！", 
+                "重要提示", MessageBoxButton.OKCancel,MessageBoxImage.Warning,MessageBoxResult.Cancel,
+                MessageBoxOptions.DefaultDesktopOnly);
+
+            if (result == MessageBoxResult.OK)
+            {
+                Parent?.Session.Clear();
+                Parent?.SessionContext.Clear();
+                Parent?.Vm.Clear();
+            }
+            
         }
     }
 }

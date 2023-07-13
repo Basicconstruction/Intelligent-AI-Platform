@@ -22,6 +22,11 @@ namespace OpenAI
             return talk?.Content;
         }
 
+        public void Clear()
+        {
+            _talks.Clear();
+        }
+
         [DataMember]
         private readonly List<Talk> _talks = new List<Talk>();
 

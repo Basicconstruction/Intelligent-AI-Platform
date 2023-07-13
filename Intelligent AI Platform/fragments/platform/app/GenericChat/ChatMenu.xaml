@@ -8,9 +8,23 @@
       Height="30" Width="800"
       Title="ChatMenu">
     <Canvas>
-        <Button x:Name="File" Background="White" Content="文件" Canvas.Left="2" Canvas.Top="0" Height="30" Width="80"/>
-        <Button x:Name="Edit" Background="White" Content="编辑" Canvas.Left="82" Canvas.Top="0" Height="30" Width="80"/>
-        <Button x:Name="Tools" Background="White" Content="工具" Canvas.Left="162" Canvas.Top="0" Height="30" Width="80"/>
-        <Button x:Name="Help" Background="White" Content="帮助" Canvas.Left="242" Canvas.Top="0" Height="30" Width="80"/>
+        <Menu Canvas.Top="0" Canvas.Left="0" Height="30">
+            <MenuItem x:Name="File" Header="文件" Height="30" Width="80">
+                <MenuItem x:Name="Preference" Header="首选项"></MenuItem>
+                <MenuItem x:Name="Import" Header="导入"></MenuItem>
+                <MenuItem x:Name="Exit" Header="退出" Click="Exit_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="Edit" Header="编辑" Width="80"></MenuItem>
+            <MenuItem x:Name="Tools" Header="工具" Width="80">
+                <MenuItem x:Name="Translator" Header="翻译器"></MenuItem>
+                <MenuItem x:Name="Calculator" Header="不靠谱的计算器"></MenuItem>
+                <MenuItem x:Name="Example" Header="举个栗子"></MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="Help" Header="帮助" Width="80"></MenuItem>
+        </Menu>
+        <!-- <Button x:Name="File" Background="White" Content="文件" Canvas.Left="2" Canvas.Top="0" Height="30" Width="80"/> -->
+        <!-- <Button x:Name="Edit" Background="White" Content="编辑" Canvas.Left="82" Canvas.Top="0" Height="30" Width="80"/> -->
+        <!-- <Button x:Name="Tools" Background="White" Content="工具" Canvas.Left="162" Canvas.Top="0" Height="30" Width="80"/> -->
+        <!-- <Button x:Name="Help" Background="White" Content="帮助" Canvas.Left="242" Canvas.Top="0" Height="30" Width="80"/> -->
     </Canvas>
 </Page>
