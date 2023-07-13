@@ -36,7 +36,7 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
                     Model.SelectedIndex = 3;
                     break;
             }
-            Key.Text = _configuration.Key;
+            Key.Password = _configuration.Key;
             FirstPrompt.Text = _configuration.FirstPrompt;
         }
 
@@ -76,7 +76,7 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
             }
 
             _configuration.FirstPrompt = FirstPrompt.Text;
-            _configuration.Key = Key.Text;
+            _configuration.Key = Key.Password;
             OpenAi.ApiKey = _configuration.Key;
             OpenAi.BaseUrl = _configuration.ProviderUrl;
             var config = DataCenter.Configuration;

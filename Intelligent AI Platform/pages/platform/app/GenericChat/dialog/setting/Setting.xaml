@@ -31,7 +31,7 @@
         <Button x:Name="Cancel" Content="取消" Canvas.Left="570" Canvas.Top="523" Height="42" Width="77" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Cancel_Click"/>
         <Button x:Name="Apply" Content="应用" Background="LightBlue" Canvas.Left="684" Canvas.Top="523" Height="42" Width="82" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Apply_Click"/>
         <Label Content="API key" Canvas.Left="200" Canvas.Top="117" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138"/>
-        <TextBox x:Name="Key" Canvas.Left="369" TextWrapping="Wrap" Text="sk-" Canvas.Top="117" Width="318" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" VerticalContentAlignment="Center"/>
+        <PasswordBox  x:Name="Key" PasswordChar="#" Canvas.Left="369"  Password="sk-" Canvas.Top="117" Width="318" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" VerticalContentAlignment="Center"/>
         <Label Content="初始Prompt" Canvas.Left="200" Canvas.Top="354" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106"/>
         <TextBox x:Name="FirstPrompt" Canvas.Left="369" TextWrapping="Wrap" Text="" Canvas.Top="354" Width="302" Height="137" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
 

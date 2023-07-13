@@ -142,7 +142,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 return;
             }
 
-            const int delay = 25;
+            const int delay = 25;//25
             var talk = new Talk(Participant.Assistant, "");
 
             // api error
@@ -176,7 +176,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             }
 
             // 黏着多个字符进行界面刷新
-            const int beeNum = 10;
+            const int beeNum = 4;//10
             var beeFlag = 0;
             
 
@@ -212,7 +212,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
 
                         Dispatcher.Invoke(() =>
                         {
-                            var bubble = new Bubble("assistant", Width * 0.8,
+                            var bubble = new Bubble("assistant", Width * 0.85,
                                 ExpectedAlign.Left, talk, done) { Vm = this };
                             InsertBack(bubble, time);
                         });
@@ -388,6 +388,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
 
         private void MessageListWidgetSizeChanged(object sender, SizeChangedEventArgs e)
         {
+            
             var height = InnerCanvas.Height;
             if (height < Height)
             {
@@ -398,13 +399,17 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 InnerCanvas.Height = _renderHeight;
             }
 
-            InnerScroll.ScrollToBottom();
-            foreach (var innerObject in _source)
+            if (e.WidthChanged)
             {
-                ((Bubble)innerObject.Element).ReArrange(Width * 0.8);
-            }
+                foreach (var innerObject in _source)
+                {
+                    ((Bubble)innerObject.Element).ReArrange(Width * 0.85);
+                }
 
-            Render();
+                Render();
+            }
+            //InnerScroll.ScrollToBottom();
+            
             // _needMarkPosition = true;
             //Console.WriteLine("空间高度变化");
             //_needScrollToEnd = true;
@@ -442,6 +447,11 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
 
         public void ContextPaint(Bubble bubble, bool isContext = true)
         {
+            if (bubble.MarkAsContext == isContext)
+            {
+                return;
+            }
+
             bubble.MarkAsContext = isContext;
         }
 
@@ -464,7 +474,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                     case ExpectedAlign.Left:
                         if (startPartRender)
                         {
-                            Canvas.SetLeft(item, 0d);
+                            //Canvas.SetLeft(item, 0d);
                             Canvas.SetTop(item, renderPosition);
                         }
 
@@ -474,7 +484,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                     case ExpectedAlign.Center:
                         if (startPartRender)
                         {
-                            Canvas.SetLeft(item, 1.0d * (renderWidth - item.Width) / 2);
+                            //Canvas.SetLeft(item, 1.0d * (renderWidth - item.Width) / 2);
                             Canvas.SetTop(item, renderPosition);
                         }
 
@@ -484,7 +494,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                     case ExpectedAlign.Right:
                         if (startPartRender)
                         {
-                            Canvas.SetRight(item, 0);
+                            //Canvas.SetRight(item, 0);
                             Canvas.SetTop(item, renderPosition);
                         }
 

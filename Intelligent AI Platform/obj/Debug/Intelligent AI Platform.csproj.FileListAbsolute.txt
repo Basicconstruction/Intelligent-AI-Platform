@@ -77,3 +77,5 @@ C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Plat
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent_AI_Platform.TrustInfo.xml
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent_AI_Platform.exe.manifest
 C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\Intelligent_AI_Platform.application
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\pages\platform\app\GenericChat\dialog\setting\Window1.g.cs
+C:\Users\Administrator\RiderProjects\Intelligent AI Platform\Intelligent AI Platform\obj\Debug\pages\platform\app\GenericChat\dialog\setting\Window1.baml

@@ -46,7 +46,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             foreach (var talk in Session.Talks)
             {
                 var bubble = new Bubble(talk.Participant.ToString(),
-                    Vm.Width * 0.8, talk.Participant == Participant.User ? ExpectedAlign.Right : ExpectedAlign.Left,
+                    Vm.Width * 0.85, talk.Participant == Participant.User ? ExpectedAlign.Right : ExpectedAlign.Left,
                     talk)
                 { Vm = Vm
                 };
