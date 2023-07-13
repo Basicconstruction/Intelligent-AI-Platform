@@ -16,7 +16,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
         private const double OtherWidgetWidth = 10;
         private const double BorderFix = 14;
         private const double BorderMarginFix = 60;
-        private double BorderUsage = 20;
+        private double _borderUsage;
         public ExpectedAlign ExpectedAlign { get; set; }
         private readonly Border _border;
         private readonly Label _label;
@@ -125,15 +125,13 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 _markAsContext = value;
                 if (value)
                 {
-                    _border.BorderThickness = new Thickness(4);
                     _border.BorderBrush = Linker.ContextBrush;
                 }
                 else
                 {
-                    _border.BorderThickness = new Thickness(2);
                     _border.BorderBrush = Linker.NotContextBrush;
                 }
-                Repaint(true);
+                //_border.Padding = new Thickness(6);
             }
         }
 
@@ -157,8 +155,8 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             _innerArg.Name = name;
             Talk = talk;
             _innerArg.Content = talk.Content+talk.Error+talk.Additional;
-            BorderUsage = ((final?8:0)) * 2;
-            _element = new MarkdownLabel(_innerArg.Content, _innerArg.DesignWidth - OtherWidgetWidth - BorderUsage-BorderMarginFix);
+            _borderUsage = ((final?8:0)) * 2;
+            _element = new MarkdownLabel(_innerArg.Content, _innerArg.DesignWidth - OtherWidgetWidth - _borderUsage-BorderMarginFix);
             _element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             _element.Arrange(new Rect(0, 0, _element.DesiredSize.Width, _element.DesiredSize.Height));
             var width = _element.ActualWidth;
@@ -169,8 +167,10 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 CornerRadius = new CornerRadius(5),
                 BorderBrush = new SolidColorBrush(Colors.Blue),
                 Child = _element,
-                Width = width + BorderUsage,
-                Height = height + BorderUsage,
+                Width = width + _borderUsage,
+                Height = height + _borderUsage,
+                // Background = new SolidColorBrush(Colors.Pink),
+                Background = new SolidColorBrush(Colors.White)
             };
             if (final)
             {
@@ -181,7 +181,10 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             {
                 _border.Padding = new Thickness(0);
             }
-            InnerCanvas = new Canvas();
+            InnerCanvas = new Canvas
+            {
+                Background = new SolidColorBrush(Colors.WhiteSmoke)
+            };
             _label = new Label
             {
                 Content = name,
@@ -206,7 +209,6 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             Canvas.SetTop(_border, OtherWidgetHeight);
             InnerCanvas.Children.Add(_border);
             InnerCanvas.Children.Add(_label);
-            //InitContext();
         }
         
         public void RePaint(double designWidth,bool done = false)
@@ -227,32 +229,19 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
         }
         private void Repaint(bool done = false)
         {
-            var prefer = 0.0;
-            if (_border.BorderThickness.Left > 0)
-            {
-                prefer = _border.BorderThickness.Left;
-            }
-            else
-            {
-                prefer = 2;// default
-            }
-            BorderUsage = ((done?6+prefer:0))*2;
-            _element.RePaint(_innerArg.Content, _innerArg.DesignWidth-OtherWidgetWidth-BorderUsage-BorderMarginFix);
+            _borderUsage = ((done?6+2:0))*2;
+            _element.RePaint(_innerArg.Content, _innerArg.DesignWidth-OtherWidgetWidth-_borderUsage-BorderMarginFix);
             _element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             _element.Arrange(new Rect(0, 0, _element.DesiredSize.Width, _element.DesiredSize.Height));
             var width = _element.ActualWidth;
             var height = _element.ActualHeight;
             
-            _border.Width = width + BorderUsage;
-            _border.Height = height + BorderUsage;
-            //_border.Padding = new Thickness(6);
+            _border.Width = width + _borderUsage;
+            _border.Height = height + _borderUsage;
             if (done)
             {
                 _border.Padding = new Thickness(6);
-                if (!(prefer > 0))
-                {
-                    _border.BorderThickness = new Thickness(2);
-                }
+                _border.BorderThickness = new Thickness(2);
             }
             else
             {
@@ -261,24 +250,20 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             _label.Content = _innerArg.Name;
             if (ExpectedAlign == ExpectedAlign.Left)
             {
-                Width = _border.Width + OtherWidgetWidth+BorderMarginFix;// 14 为字体修正
-                // Canvas.SetLeft(_border, OtherWidgetWidth + BorderMarginFix);
-                // Canvas.SetLeft(_label, 0);
+                // 宽度包括 变宽，其他组件，边框margin
+                Width = _border.Width + OtherWidgetWidth + BorderMarginFix;
             }
             else
             {
-                Width = _border.Width + OtherWidgetWidth + BorderFix+BorderMarginFix;
-                // Canvas.SetRight(_border, OtherWidgetWidth + BorderFix + BorderMarginFix);
-                // Canvas.SetRight(_label, 0);
+                Width = _border.Width + OtherWidgetWidth + BorderFix + BorderMarginFix;
             }
             Height = _border.Height + OtherWidgetHeight;
-            // InnerCanvas.Children.Remove(_border);
-            // InnerCanvas.Children.Add(_border);
-            //InnerCanvas.UpdateLayout();
-            // Canvas.SetBottom(_border, 0);
-            // Console.WriteLine($"Height {Height} Border Height {_border.Height} Border Padding {_border.Padding.Top}" +
-            //                   $"border thickness {_border.BorderThickness.Top} element height {_element.Height}" +
-            //                   $"element actualheight {_element.ActualHeight} element ");
+            // Console.WriteLine($"Paint Configuration done {done} border padding {_border.Padding} " +
+            //                   $"border thickness {_border.BorderThickness}");
+            //  Console.WriteLine($"Height {Height} Border Height {_border.Height} Border Padding {_border.Padding.Top}" +
+            //                    $"border thickness {_border.BorderThickness.Top} element height {_element.Height}" +
+            //                    $"element actualheight {_element.ActualHeight} element ");
         }
+
     }
 }

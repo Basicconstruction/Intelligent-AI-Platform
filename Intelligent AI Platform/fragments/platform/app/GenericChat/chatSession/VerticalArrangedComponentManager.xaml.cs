@@ -399,7 +399,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 InnerCanvas.Height = _renderHeight;
             }
 
-            if (e.WidthChanged)
+            if (e.WidthChanged)//宽度改变才进行重绘
             {
                 foreach (var innerObject in _source)
                 {
@@ -430,7 +430,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
             {
                 return JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(responseBody);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
