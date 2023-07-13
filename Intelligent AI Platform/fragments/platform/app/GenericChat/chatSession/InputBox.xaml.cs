@@ -6,7 +6,10 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Intelligent_AI_Platform.dataCenter;
 using Intelligent_AI_Platform.fragments.platform.app.GenericChat.item;
+using Intelligent_AI_Platform.linker;
+using Intelligent_AI_Platform.Model.platform.app.GenericChat.chat;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using MessageBox = System.Windows.MessageBox;
 using MessageBoxOptions = System.Windows.MessageBoxOptions;
@@ -160,6 +163,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                 Parent?.Session.Clear();
                 Parent?.SessionContext.Clear();
                 Parent?.Vm.Clear();
+                SessionGroup.Serialize(DataCenter.SessionGroup,Linker.Location);
             }
             
         }

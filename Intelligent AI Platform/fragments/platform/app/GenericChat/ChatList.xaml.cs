@@ -37,20 +37,21 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat
             throw new NotImplementedException();
         }
 
+        // not use
         public void UpdateView()
-        {
-            
-        }
-
-        // ReSharper disable once MethodOverloadWithOptionalParameter
-        public new void UpdateView(bool change = false)
         {
             ChatTopicList.Items.Clear();
             foreach (var session in SessionGroup.Group)
             {
                 ChatTopicList.Items.Add(new SessionListItem() {Session = session});
             }
+        }
 
+        // ReSharper disable once MethodOverloadWithOptionalParameter
+        public void UpdateView(bool change = false)
+        {
+            
+            UpdateView();
             if (change)
             {
                 ChatTopicList.SelectedIndex = 0;
