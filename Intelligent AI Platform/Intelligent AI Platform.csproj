@@ -61,10 +61,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2C95FCC87BE38BFFAA9AE9A754E3F77D7DF2426D</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>892583F88F127E1DD56F3FB418485E02FB534667</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Intelligent AI Platform_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Intelligent AI Platform_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -273,6 +273,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Intelligent AI Platform_1_TemporaryKey.pfx" />
     <None Include="Intelligent AI Platform_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />

@@ -263,6 +263,7 @@ namespace Intelligent_AI_Platform.fragments.platform.app.GenericChat.chatSession
                     }
                     else
                     {
+                        Console.WriteLine(line);
                         await GetDataError(line);
                     }
 

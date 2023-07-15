@@ -21,11 +21,12 @@
         <TextBox x:Name="Temperature" Canvas.Left="369" TextWrapping="Wrap" Text="0.3" Canvas.Top="217" Width="318" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" VerticalContentAlignment="Center"/>
         <TextBox x:Name="RequestRate" Canvas.Left="369" TextWrapping="Wrap" Text="0.6" Canvas.Top="308" Width="318" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" VerticalContentAlignment="Center"/>
         <TextBox x:Name="MaxTokens" Canvas.Left="369" TextWrapping="Wrap" Text="4000" Canvas.Top="262" Width="318" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" VerticalContentAlignment="Center"/>
-        <ComboBox x:Name="Model" Canvas.Left="369" SelectedIndex="0" Canvas.Top="166" Width="191" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top">
+        <ComboBox x:Name="Model" Canvas.Left="369" SelectedIndex="0" Canvas.Top="166" Width="191" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="Model_Selected">
             <ComboBoxItem Tag="gpt-3.5-turbo-0613">gpt-3.5-turbo-0613</ComboBoxItem>
-            <ComboBoxItem Tag="gpt-3.5-turbo-0613-16">gpt-3.5-turbo-0613-16</ComboBoxItem>
+            <ComboBoxItem Tag="gpt-3.5-turbo-16k-0613">gpt-3.5-turbo-16k-0613</ComboBoxItem>
             <ComboBoxItem Tag="gpt-4-0613">gpt-4-0613</ComboBoxItem>
             <ComboBoxItem Tag="gpt-4-32k-0613">gpt-4-32k-0613</ComboBoxItem>
+            <ComboBoxItem Tag="其他">其他</ComboBoxItem>
         </ComboBox>
         <Button x:Name="Confirm" Content="确定" Background="LightBlue" Canvas.Left="457" Canvas.Top="523" Height="42" Width="82" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Confirm_Click"/>
         <Button x:Name="Cancel" Content="取消" Canvas.Left="570" Canvas.Top="523" Height="42" Width="77" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Cancel_Click"/>
@@ -34,6 +35,7 @@
         <PasswordBox  x:Name="Key" PasswordChar="#" Canvas.Left="369"  Password="sk-" Canvas.Top="117" Width="318" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" VerticalContentAlignment="Center"/>
         <Label Content="初始Prompt" Canvas.Left="200" Canvas.Top="354" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106"/>
         <TextBox x:Name="FirstPrompt" Canvas.Left="369" TextWrapping="Wrap" Text="" Canvas.Top="354" Width="302" Height="137" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="RealModel" Canvas.Left="579" TextWrapping="Wrap" Text="" Canvas.Top="166" Width="187" Height="30" VerticalContentAlignment="Center" TextChanged="RealModel_TextChanged"/>
 
     </Canvas>
 </Window>

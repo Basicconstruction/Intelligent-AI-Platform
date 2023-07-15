@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using Intelligent_AI_Platform.dataCenter;
 using Intelligent_AI_Platform.linker;
 using OpenAI.instance;
+using System;
 
 namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
 {
@@ -26,16 +27,20 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
                 case "gpt-3.5-turbo-0613":
                     Model.SelectedIndex = 0;
                     break;
-                case "gpt-3.5-turbo-0613-16":
+                case "gpt-3.5-turbo-16k-0613":
                     Model.SelectedIndex = 1;
                     break;
                 case "gpt-4-0613":
                     Model.SelectedIndex = 2;
                     break;
-                case "gpt-4-0613-16":
+                case "gpt-4-32k-0613":
                     Model.SelectedIndex = 3;
                     break;
+                default: 
+                    Model.SelectedIndex = 4;
+                    break;
             }
+            RealModel.Text = _configuration.Model;
             Key.Password = _configuration.Key;
             FirstPrompt.Text = _configuration.FirstPrompt;
         }
@@ -56,7 +61,8 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
         }
         void ApplySettings()
         {
-            _configuration.Model = ((ComboBoxItem)Model.SelectedItem).Tag.ToString();
+
+            _configuration.Model = RealModel.Text.ToString();
             _configuration.ProviderUrl = Address.Text;
             var parse1 = double.TryParse(Temperature.Text,out var v);
             if (parse1)
@@ -81,6 +87,7 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
             OpenAi.BaseUrl = _configuration.ProviderUrl;
             var config = DataCenter.Configuration;
             config.Model = _configuration.Model;
+            Console.WriteLine($"Setting {_configuration.Model}");
             config.Temperature = _configuration.Temperature;
             config.ProviderUrl = _configuration.ProviderUrl;
             config.MaxTokens = _configuration.MaxTokens;
@@ -99,6 +106,46 @@ namespace Intelligent_AI_Platform.pages.platform.app.GenericChat.dialog.setting
         {
             ApplySettings();
             Close();
+        }
+
+        private void Model_Selected(object sender, RoutedEventArgs e)
+        {
+            if(RealModel != null)
+            {
+                if (Model.SelectedIndex <= 3)
+                {
+                    RealModel.Text = ((ComboBoxItem)Model.SelectedItem).Tag.ToString();
+                }
+                
+            }
+            
+        }
+
+        private void RealModel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(RealModel != null)
+            {
+                switch (RealModel.Text)
+                {
+                    case "gpt-3.5-turbo-0613":
+                        Model.SelectedIndex = 0;
+                        break;
+                    case "gpt-3.5-turbo-16k-0613":
+                        Model.SelectedIndex = 1;
+                        break;
+                    case "gpt-4-0613":
+                        Model.SelectedIndex = 2;
+                        break;
+                    case "gpt-4-32k-0613":
+                        Model.SelectedIndex = 3;
+                        break;
+                    default:
+                        Model.SelectedIndex = 4;
+                        break;
+                }
+                e.Handled = true;
+            }
+            
         }
     }
 }
